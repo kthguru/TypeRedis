@@ -28,6 +28,8 @@ extension JsonDebugCommand on JsonCommands {
   ///
   /// Returns the memory usage in bytes (integer).
   /// Returns a List of integers if path matches multiple values.
+  @Deprecated('Use [jsonDebugMemory] instead. '
+      'This method will be removed in the future.')
   Future<dynamic> jsonDebug({
     required String key,
     String path = r'$',

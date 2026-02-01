@@ -14,5 +14,21 @@
  * limitations under the License.
  */
 
-export 'commands/del.dart';
-export 'commands/scan.dart';
+import '../commands.dart' show JsonCommands;
+
+extension JsonDebugKeyTableDistributionCommand on JsonCommands {
+  /// JSON.DEBUG KEYTABLE-DISTRIBUTION `<topN>`
+  ///
+  /// Find and count topN longest runs in KeyTable.
+  ///
+  /// ⚠️ WARNING: This is a long running command. Do not use on production.
+  Future<dynamic> jsonDebugKeyTableDistribution2(int topN) async {
+    printDebugWarning();
+    final cmd = <String>[
+      'JSON.DEBUG',
+      'KEYTABLE-DISTRIBUTION',
+      topN.toString()
+    ];
+    return execute(cmd);
+  }
+}

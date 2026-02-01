@@ -23,9 +23,10 @@ extension HGetCommand on HashCommands {
   ///
   /// Returns the value associated with field, or `null` when field is not
   /// present in the hash or key does not exist.
-  Future<String?> hGet(String key, String field) async {
+  // Future<String?> hGet(String key, String field) async {
+  Future<dynamic> hGet(String key, String field) async {
     final cmd = <String>['HGET', key, field];
     final result = await execute(cmd);
-    return result as String?;
+    return result; // as String?;
   }
 }

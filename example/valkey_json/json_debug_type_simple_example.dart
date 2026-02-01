@@ -83,7 +83,7 @@ Future<void> runDebugTypeExamples(ValkeyClient client) async {
   logger.info('Toggled isActive: $newVal'); // Expected: 0 (false)
 
   // 4. JSON.DEBUG MEMORY
-  final memoryBytes = await client.jsonDebug(key: 'config:app');
+  final memoryBytes = await client.jsonDebugMemory(key: 'config:app');
   logger
       .info('Memory Usage: $memoryBytes bytes'); // Expected: Integer (e.g. 120)
 

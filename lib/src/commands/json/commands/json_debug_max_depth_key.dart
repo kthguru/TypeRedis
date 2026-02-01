@@ -14,5 +14,17 @@
  * limitations under the License.
  */
 
-export 'commands/del.dart';
-export 'commands/scan.dart';
+import '../commands.dart' show JsonCommands;
+
+extension JsonDebugMaxDepthKeyCommand on JsonCommands {
+  /// JSON.DEBUG MAX-DEPTH-KEY
+  ///
+  /// Find JSON key with maximum depth.
+  ///
+  /// ⚠️ WARNING: This is a long running command. Do not use on production.
+  Future<dynamic> jsonDebugMaxDepthKey() async {
+    printDebugWarning();
+    final cmd = <String>['JSON.DEBUG', 'MAX-DEPTH-KEY'];
+    return execute(cmd);
+  }
+}

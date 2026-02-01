@@ -231,19 +231,19 @@ Future<void> main() async {
     // --- TESTS FOR v0.5.0 (Hashes) ---
 
     test('HSET should return 1 for a new field', () async {
-      final response = await client.hset('test:hash', 'field1', 'value1');
+      final response = await client.hSet('test:hash', {'field1': 'value1'});
       expect(response, 1);
     });
 
     test('HSET should return 0 for an updated field', () async {
-      await client.hset('test:hash', 'field_to_update', 'initial_value');
+      await client.hSet('test:hash', {'field_to_update': 'initial_value'});
       final response =
-          await client.hset('test:hash', 'field_to_update', 'updated_value');
+          await client.hSet('test:hash', {'field_to_update': 'updated_value'});
       expect(response, 0);
     });
 
     test('HGET should retrieve the correct value', () async {
-      await client.hset('test:hash:get', 'field', 'hello');
+      await client.hSet('test:hash:get', {'field': 'hello'});
       final response = await client.hGet('test:hash:get', 'field');
       expect(response, 'hello');
     });
@@ -255,17 +255,17 @@ Future<void> main() async {
 
     test('HGETALL should return a Map of all fields and values', () async {
       const key = 'test:hash:all';
-      await client.hset(key, 'name', 'Valkyrie');
-      await client.hset(key, 'project', 'valkey_client');
+      await client.hSet(key, {'name': 'Valkyrie'});
+      await client.hSet(key, {'project': 'valkey_client'});
 
-      final response = await client.hgetall(key);
+      final response = await client.hGetAll(key);
 
       expect(response, isA<Map<String, String>>());
       expect(response, {'name': 'Valkyrie', 'project': 'valkey_client'});
     });
 
     test('HGETALL on a non-existent key should return an empty Map', () async {
-      final response = await client.hgetall('test:hash:non_existent');
+      final response = await client.hGetAll('test:hash:non_existent');
       expect(response, isA<Map<String, String>>());
       expect(response, isEmpty);
     });
@@ -414,7 +414,7 @@ Future<void> main() async {
 
     test('DEL should return 1 for a deleted key', () async {
       await client.set('test:del:key', 'value');
-      final response = await client.del('test:del:key');
+      final response = await client.del(['test:del:key']);
       expect(response, 1);
       // Verify deletion
       final exists = await client.exists('test:del:key');
@@ -422,7 +422,7 @@ Future<void> main() async {
     });
 
     test('DEL should return 0 for a non-existent key', () async {
-      final response = await client.del('test:del:non_existent');
+      final response = await client.del(['test:del:non_existent']);
       expect(response, 0);
     });
 
@@ -456,7 +456,7 @@ Future<void> main() async {
       await client.set(key, 'i am a string');
 
       // 2. Try to use a Hash command (HSET) on the String key
-      final hsetFuture = client.hset(key, 'field', 'value');
+      final hsetFuture = client.hSet(key, {'field': 'value'});
 
       // 3. Expect the specific WRONGTYPE error from the server
       await expectLater(
@@ -465,7 +465,7 @@ Future<void> main() async {
               .having((e) => e.code, 'code', 'WRONGTYPE')));
 
       // 4. Clean up the key
-      await client.del(key);
+      await client.del([key]);
     });
   },
 

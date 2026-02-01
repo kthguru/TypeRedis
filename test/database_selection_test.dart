@@ -33,7 +33,7 @@ void main() {
         database: 0,
       );
       await clientDb0.connect();
-      await clientDb0.del('test_isolation_key');
+      await clientDb0.del(['test_isolation_key']);
 
       // 2. Connect to DB 2 and set key
       final clientDb2 = ValkeyClient(

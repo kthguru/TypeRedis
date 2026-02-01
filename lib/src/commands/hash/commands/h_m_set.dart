@@ -27,16 +27,26 @@ extension HMSetCommand on HashCommands {
   /// Note: As of Redis 4.0.0, this command is regarded as deprecated.
   /// It can be replaced by HSET with multiple field-value pairs.
   ///
+  /// Note: HMSET is normally available on Valkey.
+  ///
+  /// Internally, this uses the modern variadic `HSET` command which is
+  /// more efficient and replaces the deprecated `HMSET` command, while keeping
+  /// the familiar API.
+  ///
   /// [data] is a map of field-value pairs to set.
-  Future<void> hMSet(String key, Map<String, String> data) async {
-    if (data.isEmpty) return;
+  /// Returns the number of fields that were added (new fields).
+  Future<int> hMSet(String key, Map<String, String> data) async {
+    if (data.isEmpty) return 0;
 
+    // Use HSET instead of HMSET as HMSET is deprecated in newer Redis versions
+    // HSET key field1 value1 field2 value2 ...
+    // final cmd = <String>['HSET', key];
     final cmd = <String>['HMSET', key];
     data.forEach((field, value) {
       cmd.add(field);
       cmd.add(value);
     });
 
-    await execute(cmd);
+    return executeInt(cmd);
   }
 }

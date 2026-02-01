@@ -48,7 +48,7 @@ void main() async {
     print('DECRBY 5 result: $val4'); // Expected: 5
 
     // Cleanup
-    await client.del(key);
+    await client.del([key]);
   } catch (e) {
     print('❌ Error: $e');
   } finally {

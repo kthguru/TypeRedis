@@ -14,5 +14,17 @@
  * limitations under the License.
  */
 
-export 'commands/del.dart';
-export 'commands/scan.dart';
+import '../commands.dart' show JsonCommands;
+
+extension JsonDebugKeyTableCorruptCommand on JsonCommands {
+  /// JSON.DEBUG KEYTABLE-CORRUPT `<name>`
+  ///
+  /// Intentionally corrupt KeyTable handle counts.
+  ///
+  /// ⚠️ WARNING: This is a dangerous command. Do not use on production.
+  Future<dynamic> jsonDebugKeyTableCorrupt(String name) async {
+    printDebugWarning();
+    final cmd = <String>['JSON.DEBUG', 'KEYTABLE-CORRUPT', name];
+    return execute(cmd);
+  }
+}

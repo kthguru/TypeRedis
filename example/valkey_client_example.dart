@@ -56,18 +56,18 @@ Future<void> runCommandExamples(ValkeyClientBase client) async {
     // --- HASH (v0.5.0) ---
     print('\n--- HASH (Map/Object) ---');
     print("Sending: HSET user:1 name 'Valkyrie'");
-    final hsetResponse = await client.hset('user:1', 'name', 'Valkyrie');
+    final hsetResponse = await client.hSet('user:1', {'name': 'Valkyrie'});
     print('Received (1=new, 0=update): $hsetResponse');
 
     print("Sending: HSET user:1 project 'valkey_client'");
-    await client.hset('user:1', 'project', 'valkey_client');
+    await client.hSet('user:1', {'project': 'valkey_client'});
 
     print('Sending: HGET user:1 name');
     final hgetResponse = await client.hGet('user:1', 'name');
     print('Received: $hgetResponse'); // Should be "Valkyrie"
 
     print('Sending: HGETALL user:1');
-    final hgetAllResponse = await client.hgetall('user:1');
+    final hgetAllResponse = await client.hGetAll('user:1');
     // Should be {name: Valkyrie, project: valkey_client}
     print('Received Map: $hgetAllResponse');
 
@@ -122,7 +122,7 @@ Future<void> runCommandExamples(ValkeyClientBase client) async {
         '$ttlResponse'); // Should be <= 10
 
     print('Sending: DEL mylist'); // Delete the list key
-    final delResponse = await client.del('mylist');
+    final delResponse = await client.del(['mylist']);
     print('Received (number of keys deleted): $delResponse'); // Should be 1
 
     print('Sending: EXISTS mylist');

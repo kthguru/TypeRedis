@@ -14,5 +14,16 @@
  * limitations under the License.
  */
 
-export 'commands/del.dart';
-export 'commands/scan.dart';
+import '../commands.dart' show JsonCommands;
+
+extension JsonDebugDepthCommand on JsonCommands {
+  /// JSON.DEBUG DEPTH key
+  ///
+  /// Report the maximum path depth of the JSON document.
+  ///
+  /// Returns the depth as an integer.
+  Future<int> jsonDebugDepth({required String key}) async {
+    final cmd = <String>['JSON.DEBUG', 'DEPTH', key];
+    return executeInt(cmd);
+  }
+}

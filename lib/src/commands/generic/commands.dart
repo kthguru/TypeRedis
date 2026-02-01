@@ -29,4 +29,22 @@ mixin GenericCommands {
 
   /// Checks if the connected server is Valkey.
   Future<bool> isValkeyServer();
+
+  /// Helper to execute a command that is expected to return an Integer.
+  ///
+  /// Useful for commands like HDEL, HLEN, HINCRBY, etc.
+  /// Handles type casting and parsing safely.
+  Future<int> executeInt(List<String> command) async {
+    final result = await execute(command);
+
+    if (result is int) return result;
+    if (result == null) return 0; // or throw depending on strictness
+
+    // Sometimes servers might return integer-like strings
+    if (result is String) {
+      return int.tryParse(result) ?? 0;
+    }
+
+    throw Exception('Expected integer response but got ${result.runtimeType}');
+  }
 }

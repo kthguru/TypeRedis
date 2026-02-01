@@ -26,14 +26,20 @@ extension HSetCommand on HashCommands {
   ///
   /// [data]: A map containing field-value pairs to set.
   ///
+  /// If [key] does not exist, a new key holding a hash is created.
+  /// If field already exists in the hash, it is overwritten.
+  ///
   /// Returns the number of fields that were added.
-  Future<int> hSet(String key, Map<String, String> data) async {
+  /// - 1 if field is a new field in the hash and value was set.
+  /// - 0 if field already exists in the hash and the value was updated.
+  // Future<int> hSet(String key, Map<String, String> data) async {
+  Future<int> hSet(String key, Map<String, dynamic> data) async {
     if (data.isEmpty) return 0;
 
     final cmd = <String>['HSET', key];
     data.forEach((field, value) {
       cmd.add(field);
-      cmd.add(value);
+      cmd.add(value.toString());
     });
 
     return executeInt(cmd);

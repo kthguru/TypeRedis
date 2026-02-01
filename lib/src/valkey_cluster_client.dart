@@ -479,20 +479,54 @@ class ValkeyClusterClient implements ValkeyClusterClientBase {
       _executeOnKey(key, (client) => client.set(key, value));
 
   @override
-  Future<int> del(String key) =>
-      _executeOnKey(key, (client) => client.del(key));
+  Future<int> del(List<String> keys) async {
+    final results = await Future.wait<int>(
+      keys.map((k) => _executeOnKey(k, (client) => client.del([k]))),
+    );
+    return results.fold<int>(0, (s, r) => s + r);
+  }
+
+  // // Helper function in same module
+  // // Groups keys by node and executes batched deletes per node.
+  // Future<List<Future<int>>> _deleteByNodeBatches(List<String> keys) {
+  //   final groups = <ClusterNodeInfo, List<String>>{};
+  //   for (final k in keys) {
+  //     final node = _slotMap?.getNodeForKey(k);
+  //     if (node == null) return []; // signal to caller
+  //     groups.putIfAbsent(node, () => []).add(k);
+  //   }
+  //   return groups.entries.map((e) {
+  //     final repKey = e.value.first;
+  //     return _executeOnKey<int>(repKey, (client) => client.del(e.value));
+  //   }).toList();
+  // }
+
+  // // del uses the helper
+  // Future<int> del2(List<String> keys) async {
+  //   if (keys.isEmpty) return 0;
+  //   final futures = _deleteByNodeBatches(keys);
+  //   if (futures.isEmpty) {
+  //     // fallback to per-key deletes if grouping failed
+  //     final results = await Future.wait<int>(
+  //       keys.map((k) => _executeOnKey(k, (client) => client.del([k]))),
+  //     );
+  //     return results.fold<int>(0, (s, r) => s + r);
+  //   }
+  //   final results = await Future.wait<int>(futures);
+  //   return results.fold<int>(0, (s, r) => s + r);
+  // }
 
   @override
   Future<int> exists(String key) =>
       _executeOnKey(key, (client) => client.exists(key));
 
   @override
-  Future<String?> hGet(String key, String field) =>
+  Future<dynamic> hGet(String key, String field) =>
       _executeOnKey(key, (client) => client.hGet(key, field));
 
   @override
   @Deprecated('Use [hGet] instead. This method will be removed in v4.0.0.')
-  Future<String?> hget(String key, String field) => hGet(key, field);
+  Future<dynamic> hget(String key, String field) => hGet(key, field);
 
   @override
   Future<int> hSet(String key, Map<String, String> data) =>

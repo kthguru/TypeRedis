@@ -67,9 +67,9 @@ void main() async {
     }
 
     // Cleanup
-    await client.del('key:A');
-    await client.del('key:B');
-    await client.del('key:C');
+    await client.del(['key:A']);
+    await client.del(['key:B']);
+    await client.del(['key:C']);
   } on ValkeyException catch (e) {
     print('❌ Error: $e');
   } finally {

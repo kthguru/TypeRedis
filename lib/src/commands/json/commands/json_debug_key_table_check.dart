@@ -14,5 +14,17 @@
  * limitations under the License.
  */
 
-export 'commands/del.dart';
-export 'commands/scan.dart';
+import '../commands.dart' show JsonCommands;
+
+extension JsonDebugKeyTableCheckCommand on JsonCommands {
+  /// JSON.DEBUG KEYTABLE-CHECK
+  ///
+  /// Extended KeyTable integrity check.
+  ///
+  /// ⚠️ WARNING: This is a long running command. Do not use on production.
+  Future<dynamic> jsonDebugKeyTableCheck() async {
+    printDebugWarning();
+    final cmd = <String>['JSON.DEBUG', 'KEYTABLE-CHECK'];
+    return execute(cmd);
+  }
+}

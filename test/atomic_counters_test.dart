@@ -33,7 +33,7 @@ void main() async {
     final uniqueId = DateTime.now().microsecondsSinceEpoch;
     final key = 'counter:test:$uniqueId';
 
-    await client.del(key); // Init
+    await client.del([key]); // Init
 
     // 1. INCR
     expect(await client.incr(key), 1); // 0 + 1 = 1
@@ -49,6 +49,6 @@ void main() async {
     expect(await client.decrBy(key, 5), 6); // 11 - 5 = 6
 
     // Cleanup
-    await client.del(key);
+    await client.del([key]);
   });
 }

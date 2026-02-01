@@ -14,5 +14,20 @@
  * limitations under the License.
  */
 
-export 'commands/del.dart';
-export 'commands/scan.dart';
+import '../commands.dart' show JsonCommands;
+
+extension JsonDebugHelpCommand on JsonCommands {
+  /// JSON.DEBUG HELP
+  ///
+  /// Print help message.
+  ///
+  /// Returns a list of help strings.
+  Future<List<String>> jsonDebugHelp() async {
+    final cmd = <String>['JSON.DEBUG', 'HELP'];
+    final result = await execute(cmd);
+    if (result is List) {
+      return result.map((e) => e.toString()).toList();
+    }
+    return [];
+  }
+}

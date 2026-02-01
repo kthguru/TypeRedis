@@ -104,8 +104,8 @@ Future<void> main() async {
       expect(getBRes, 'Value B');
 
       // Clean up
-      await client.del(keyA);
-      await client.del(keyB);
+      await client.del([keyA]);
+      await client.del([keyB]);
 
       // Act
       await client.set(keyA, 'Value A');
@@ -116,8 +116,8 @@ Future<void> main() async {
       expect(await client.get(keyB), 'Value B');
 
       // Clean up
-      await client.del(keyA);
-      await client.del(keyB);
+      await client.del([keyA]);
+      await client.del([keyB]);
     });
 
     // test('mget() should throw UnimplementedError (v1.3.0 limitation)',
@@ -170,9 +170,9 @@ Future<void> main() async {
       expect(result[3], isNull); // Missing key
 
       // Clean up
-      await client.del(keyA);
-      await client.del(keyB);
-      await client.del(keyC);
+      await client.del([keyA]);
+      await client.del([keyB]);
+      await client.del([keyC]);
     });
   },
       // Skip this entire group if the cluster is not running

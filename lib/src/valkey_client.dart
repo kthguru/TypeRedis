@@ -34,6 +34,7 @@ import 'cluster_slots_parser.dart' show parseClusterSlotsResponse;
 // ------------------------------------------------------------------------
 // Redis/Valkey Commands
 import 'commands/generic/commands.dart' show GenericCommands;
+import 'commands/generic/commands/del.dart' show DelCommand;
 import 'commands/hash/commands.dart' show HashCommands;
 import 'commands/hash/commands/h_get.dart' show HGetCommand;
 import 'commands/hash/commands/h_get_all.dart' show HGetAllCommand;
@@ -1825,7 +1826,7 @@ class ValkeyClient
 
   // --- HASH (v0.5.0) ---
   @override
-  Future<String?> hGet(String key, String field) async =>
+  Future<dynamic> hGet(String key, String field) async =>
       HGetCommand(this).hGet(key, field);
   // Future<String?> hGet(String key, String field) async {
   //   final response = await execute(['HGET', key, field]);
@@ -1835,10 +1836,11 @@ class ValkeyClient
 
   @override
   @Deprecated('Use [hGet] instead. This method will be removed in v4.0.0.')
-  Future<String?> hget(String key, String field) async => hGet(key, field);
+  Future<dynamic> hget(String key, String field) async => hGet(key, field);
 
   @override
-  Future<int> hSet(String key, Map<String, String> data) async =>
+  // Future<int> hSet(String key, Map<String, String> data) async =>
+  Future<int> hSet(String key, Map<String, dynamic> data) async =>
       HSetCommand(this).hSet(key, data);
   // Future<int> hset(String key, String field, String value) async {
   //   final response = await execute(['HSET', key, field, value]);
@@ -1965,11 +1967,12 @@ class ValkeyClient
   // --- KEY MANAGEMENT (v0.8.0) ---
 
   @override
-  Future<int> del(String key) async {
-    // DEL returns an Integer (:)
-    final response = await execute(['DEL', key]);
-    return response as int;
-  }
+  Future<int> del(List<String> keys) async => DelCommand(this).del(keys);
+  // Future<int> del(String key) async {
+  //   // DEL returns an Integer (:)
+  //   final response = await execute(['DEL', key]);
+  //   return response as int;
+  // }
 
   @override
   Future<int> exists(String key) async {

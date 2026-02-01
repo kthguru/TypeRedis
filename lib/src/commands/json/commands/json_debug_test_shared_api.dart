@@ -14,5 +14,17 @@
  * limitations under the License.
  */
 
-export 'commands/del.dart';
-export 'commands/scan.dart';
+import '../commands.dart' show JsonCommands;
+
+extension JsonDebugTestSharedApiCommand on JsonCommands {
+  /// JSON.DEBUG TEST-SHARED-API key path
+  ///
+  /// Provide testing for Shared api interface for search.
+  ///
+  /// ⚠️ WARNING: This is a testing command. Do not use on production.
+  Future<dynamic> jsonDebugTestSharedApi(String key, String path) async {
+    printDebugWarning();
+    final cmd = <String>['JSON.DEBUG', 'TEST-SHARED-API', key, path];
+    return execute(cmd);
+  }
+}

@@ -235,16 +235,12 @@ jobs:
           dart test ../../../test/ssl_connection_test_single_ssl_and_mtls.dart
 
       - name: Run Database Tests
-        # working-directory: docs/testenv/${{ matrix.test_dir_name }}
         run: |
-          cd docs/testenv/${{ matrix.ssl_dir }}
-          dart test ../../../test/database_selection_test.dart
+          dart test test/database_selection_test.dart
 
       - name: Run Replica Read Tests
-        # working-directory: docs/testenv/${{ matrix.test_dir_name }}
         run: |
-          cd docs/testenv/${{ matrix.ssl_dir }}
-          dart test ../../../test/replica_read_test.dart
+          dart test test/replica_read_test.dart
 
       # TODO: No problem but, for now, comment this until setup(7001) issue is resolved
       - name: Run Cluster Tests (Sharded)

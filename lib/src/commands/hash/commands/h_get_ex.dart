@@ -17,31 +17,41 @@
 import '../commands.dart' show HashCommands;
 
 extension HGetExCommand on HashCommands {
-  /// HGETEX key field [EX seconds | PX milliseconds | EXAT timestamp |
-  /// PXAT milliseconds-timestamp | PERSIST]
+  /// HGETEX key [EX seconds | PX milliseconds | EXAT unix-time-seconds |
+  /// PXAT unix-time-milliseconds | PERSIST] FIELDS numfields field [field ...]
   ///
-  /// Get the value of [field] in the hash at [key] and optionally set
-  /// its expiration.
+  /// Get the value of one or more [fields] of a given hash stored at [key],
+  /// and optionally manipulate their expiration time.
+  /// Without providing any optional flags, this command behaves exactly like
+  /// a normal HMGET command.
   ///
-  /// Options (only one can be used):
-  /// - [ex]: Set expiration in seconds.
-  /// - [px]: Set expiration in milliseconds.
-  /// - [exAt]: Set expiration to Unix timestamp (seconds).
-  /// - [pxAt]: Set expiration to Unix timestamp (milliseconds).
-  /// - [persist]: Remove the expiration from the field.
+  /// Options (Mutually Exclusive):
+  /// - [ex]: Set the specified expiration time, in seconds.
+  /// - [px]: Set the specified expiration time, in milliseconds.
+  /// - [exAt]: Set the specified Unix time at which the fields will expire,
+  /// in seconds.
+  /// - [pxAt]: Set the specified Unix time at which the fields will expire,
+  /// in milliseconds.
+  /// - [persist]: Remove the expiration time associated with the fields.
   ///
-  /// Returns the value of the field, or `null` if the field does not exist.
-  Future<String?> hGetEx(
+  /// Note: This command is available in newer versions (e.g., Redis 9.0.0 / Valkey).
+  ///
+  /// Returns a list of values associated with the given fields, in the same
+  /// order as they are requested.
+  Future<List<String?>> hGetEx(
     String key,
-    String field, {
+    List<String> fields, {
     int? ex,
     int? px,
     int? exAt,
     int? pxAt,
     bool persist = false,
   }) async {
-    final cmd = <String>['HGETEX', key, field];
+    if (fields.isEmpty) return [];
 
+    final cmd = <String>['HGETEX', key];
+
+    // Options are mutually exclusive
     if (ex != null) {
       cmd.add('EX');
       cmd.add(ex.toString());
@@ -58,7 +68,61 @@ extension HGetExCommand on HashCommands {
       cmd.add('PERSIST');
     }
 
+    // Add FIELDS syntax
+    cmd.add('FIELDS');
+    cmd.add(fields.length.toString());
+    cmd.addAll(fields);
+
     final result = await execute(cmd);
-    return result as String?;
+
+    if (result is List) {
+      return result.map((e) => e as String?).toList();
+    }
+    return [];
   }
+
+  /// HGETEX key field [EX seconds | PX milliseconds | EXAT timestamp |
+  /// PXAT milliseconds-timestamp | PERSIST]
+  ///
+  /// Get the value of [field] in the hash at [key] and optionally set
+  /// its expiration.
+  ///
+  /// Options (only one can be used):
+  /// - [ex]: Set expiration in seconds.
+  /// - [px]: Set expiration in milliseconds.
+  /// - [exAt]: Set expiration to Unix timestamp (seconds).
+  /// - [pxAt]: Set expiration to Unix timestamp (milliseconds).
+  /// - [persist]: Remove the expiration from the field.
+  ///
+  /// Returns the value of the field, or `null` if the field does not exist.
+  // Future<dynamic> hGetEx(
+  //   String key,
+  //   String field, {
+  //   int? ex,
+  //   int? px,
+  //   int? exAt,
+  //   int? pxAt,
+  //   bool persist = false,
+  // }) async {
+  //   final cmd = <String>['HGETEX', key, field];
+
+  //   if (ex != null) {
+  //     cmd.add('EX');
+  //     cmd.add(ex.toString());
+  //   } else if (px != null) {
+  //     cmd.add('PX');
+  //     cmd.add(px.toString());
+  //   } else if (exAt != null) {
+  //     cmd.add('EXAT');
+  //     cmd.add(exAt.toString());
+  //   } else if (pxAt != null) {
+  //     cmd.add('PXAT');
+  //     cmd.add(pxAt.toString());
+  //   } else if (persist) {
+  //     cmd.add('PERSIST');
+  //   }
+
+  //   final result = await execute(cmd);
+  //   return result;
+  // }
 }
