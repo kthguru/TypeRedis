@@ -68,6 +68,12 @@
 - [SCRIPTING AND FUNCTIONS](https://github.com/infradise/valkey_client/blob/main/docs/commands/SCRIPTING-AND-FUNCTIONS.md)
 - [SEARCH](https://github.com/infradise/valkey_client/blob/main/docs/commands/SEARCH.md)
 - [STREAM](https://github.com/infradise/valkey_client/blob/main/docs/commands/STREAM.md)
+- [TIME SERIES](https://github.com/infradise/valkey_client/blob/main/docs/commands/TIME-SERIES.md)
+- [VECTOR SET](https://github.com/infradise/valkey_client/blob/main/docs/commands/VECTOR-SET.md)
+- [CUCKOO FILTER](https://github.com/infradise/valkey_client/blob/main/docs/commands/CUCKOO-FILTER.md)
+- [COUNT-MIN SKETCH](https://github.com/infradise/valkey_client/blob/main/docs/commands/COUNT-MIN-SKETCH.md)
+- [T-DIGEST SKETCH](https://github.com/infradise/valkey_client/blob/main/docs/commands/T-DIGEST-SKETCH.md)
+- [TOP-K SKETCH](https://github.com/infradise/valkey_client/blob/main/docs/commands/TOP-K-SKETCH.md)
 
 ## Features
 
