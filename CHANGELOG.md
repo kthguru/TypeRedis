@@ -7,7 +7,7 @@
     * **Refactored & Enhanced**: Migrated legacy monolithic commands (`lpush`, `rpush`, `lpop`, `rpop`, `lrange`) to the new modular extensions.
         * `ValkeyClient` methods now internally delegate logic to the new extensions (`lPush`, `rPush`, `lPop`, `rPop`, `lRange`), ensuring full backward compatibility and interface compliance.
     * **New Server Commands**
-        * Added: `flushAll`, `flushDb`.
+        * Added: `flushAll`, `flushDb`, `info`.
 
 ## 3.1.0
 * **Modular Architecture**

@@ -14,11 +14,19 @@
  * limitations under the License.
  */
 
-import '../commands.dart' show ListCommands;
+import '../commands.dart';
 
-extension BlMoveCommand on ListCommands {
-  Future<dynamic> blMove({
-    required String key,
-    String path = r'$',
-  }) async {}
+extension LSetCommand on ListCommands {
+  /// LSET key index element
+  ///
+  /// Sets the list element at [index] to [element].
+  ///
+  /// Complexity: O(N) where N is the length of the list.
+  ///
+  /// Returns:
+  /// - 'OK'.
+  Future<String> lSet(String key, int index, String element) async {
+    final cmd = <String>['LSET', key, index.toString(), element];
+    return executeString(cmd);
+  }
 }
