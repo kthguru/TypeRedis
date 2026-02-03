@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.5.0
+* **Modular Architecture**
+    * **New SORTED SET Commands** 
+        * Added full suite of sorted set commands: `bzMPop`, `bzPopMax`, `bzPopMin`, `zAdd`, `zCard`, `zCount`, `zDiff`, `zDiffStore`, `zIncrBy`, `zInter`, `zInterCard`, `zInterStore`, `zLexCount`, `zMPop`, `zMScore`, `zPopMax`, `zPopMin`, `zRandMember`, `zRange`, `zRangeByLex`, `zRangeByScore`, `zRangeStore`, `zRank`, `zRem`, `zRemRangeByLex`, `zRemRangeByRank`, `zRemRangeByScore`, `zRevRange`, `zRevRangeByLex`, `zRevRangeByScore`, `zRevRank`, `zScan`, `zScore`, `zUnion`, `zUnionStore`.
+
 ## 3.4.0
 * **Modular Architecture**
     * **New SET Commands** 
