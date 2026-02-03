@@ -18,43 +18,84 @@ import 'package:test/test.dart';
 import 'package:valkey_client/valkey_client.dart';
 
 void main() {
-  group('String Commands - Extra (MSETEX, DIGEST, DELEX)', () {
+  group('String Commands (Redis Only Feature) - Extra (MSETEX, DIGEST, DELEX)',
+      () {
     late ValkeyClient client;
+    var isRedis = false;
+    const port = 6379;
+
+    setUpAll(() async {
+      final tempClient = ValkeyClient(host: 'localhost', port: port);
+      try {
+        await tempClient.connect();
+        isRedis = await tempClient.isRedisServer();
+      } catch (e) {
+        print('Warning: Failed to check server type in setUpAll: $e');
+      } finally {
+        await tempClient.close();
+      }
+    });
 
     setUp(() async {
-      client = ValkeyClient(host: 'localhost', port: 6379);
+      if (!isRedis) return;
+
+      client = ValkeyClient(host: 'localhost', port: port);
       await client.connect();
       await client.flushAll();
     });
 
     tearDown(() async {
-      await client.close(); // disconnect
+      if (isRedis) {
+        try {
+          if (client.isConnected) {
+            await client.close();
+          }
+        } catch (_) {}
+      }
     });
 
-    test('MSETEX', () async {
+    void testRedis(String description, Future<void> Function() body) {
+      test(description, () async {
+        if (!isRedis) {
+          markTestSkipped('Skipping: This feature is supported on Redis only.');
+          return;
+        }
+        await body();
+      });
+    }
+
+    testRedis('MSETEX - get and ttl', () async {
       const k1 = 'test:msetex:1';
       const k2 = 'test:msetex:2';
 
-      // 1. MSETEX with EX option
-      // Library sends: MSETEX 2 k1 v1 k2 v2 EX 10
-      final result = await client.mSetEx({
-        k1: 'v1',
-        k2: 'v2',
-      }, ex: 10);
+      final result = await client.mSetEx({k1: 'v1', k2: 'v2'}, ex: 10);
+      expect(result, equals(1));
 
-      expect(result, equals(1)); // Returns 1 on success
-
-      // 2-1. Verify values
-      final values = await client.mGet([k1, k2]);
-      expect(values, equals(['v1', 'v2']));
-
-      // 2-2. Verify values and TTL
+      // Verify values and TTL
       expect(await client.get(k1), equals('v1'));
       final ttl = await client.ttl(k1);
       expect(ttl, inInclusiveRange(1, 10));
     });
 
-    test('DELEX with IFEQ / IFNE', () async {
+    testRedis('MSETEX - mGet and ttl', () async {
+      const k3 = 'test:msetex:3';
+      const k4 = 'test:msetex:4';
+
+      // 1. MSETEX with EX option
+      // MSETEX 2 k1 v1 k2 v2 EX 10
+      final result = await client.mSetEx({
+        k3: 'v3',
+        k4: 'v4',
+      }, ex: 10);
+
+      expect(result, equals(1)); // Returns 1 on success
+
+      // 2. Verify values
+      final values = await client.mGet([k3, k4]);
+      expect(values, equals(['v3', 'v4']));
+    });
+
+    testRedis('DELEX with IFEQ / IFNE', () async {
       const key = 'test:delex:cond';
 
       // 1. IFEQ - Success
@@ -74,7 +115,7 @@ void main() {
       expect(res3, equals(1)); // 'target' != 'wrong', so delete
     });
 
-    test('DIGEST and DELEX with IFDEQ', () async {
+    testRedis('DIGEST and DELEX with IFDEQ', () async {
       const key = 'test:delex:digest';
       const value = 'some_long_value_to_hash';
 

@@ -19,6 +19,15 @@ import 'package:valkey_client/valkey_client.dart';
 Future<void> main() async {
   final client = ValkeyClient(host: 'localhost', port: 6379);
   await client.connect();
+
+  // Redis Only Feature
+  if (!await client.isRedisServer()) {
+    print('⚠️  Skipping: This example requires a Redis server.');
+    print('   Current server appears to be Valkey or other compatible server.');
+    await client.close(); // disconnect
+    return;
+  }
+
   await client.flushAll();
 
   print('--- 🧵 String Extra Commands Example ---\n');
