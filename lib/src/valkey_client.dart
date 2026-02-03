@@ -913,17 +913,20 @@ class ValkeyClient // FYI. extends ValkeyConnection
     // --- Rule 1: Determine Name & Version ---
     var serverName = 'unknown';
     var version = '0.0.0';
+    var modeName = '';
 
     if (infoMap.containsKey('valkey_version')) {
       serverName = 'valkey';
       version = infoMap['valkey_version']!;
+      modeName = 'server_mode';
     } else if (infoMap.containsKey('redis_version')) {
       serverName = 'redis';
       version = infoMap['redis_version']!;
+      modeName = 'redis_mode';
     }
 
     // --- Detect Mode ---
-    final serverMode = infoMap['server_mode'] ?? 'unknown';
+    final serverMode = infoMap[modeName] ?? 'unknown';
     final mode = switch (serverMode) {
       'cluster' => RunningMode.cluster,
       'sentinel' => RunningMode.sentinel,

@@ -31,6 +31,8 @@ class ServerMetadata {
   final String serverName;
 
   /// The running mode of the server.
+  /// Redis: redis_mode
+  /// Valkey: server_mode
   final RunningMode mode;
 
   /// The maximum number of databases available for selection.

@@ -88,6 +88,10 @@ void main() {
       final meta = client.metadata!;
       print('Test Metadata Output: $meta');
 
+      // name: valkey, version: 9.0.0,
+      // name: redis, version: 8.4.0,
+      // mode: RunningMode.standalone, maxDatabases: 16)
+
       expect(meta.serverName, anyOf(equals('redis'), equals('valkey')));
       expect(meta.version, isNotEmpty);
       expect(meta.mode, isNot(RunningMode.unknown));
