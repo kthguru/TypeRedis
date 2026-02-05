@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.7.0
+* **Modular Architecture**
+    * **New HYPERLOGLOG Commands** 
+        * Added full suite of HYPERLOGLOG commands: `pfAdd`, `pfCount`, `pfDebug`, `pfMerge`, `pfSelfTest`.
+    * **New GEOSPATIAL INDICES Commands** 
+        * Added full suite of GEOSPATIAL INDICES commands: `geoAdd`, `geoDist`, `geoHash`, `geoPos`, `geoRadius`, `geoRadiusByMember`, `geoRadiusByMemberRo`, `geoRadiusRo`, `geoSearch`, `geoSearchStore`.
+
 ## 3.6.0
 * **Modular Architecture**
     * **New BITMAP Commands** 
