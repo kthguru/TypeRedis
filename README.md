@@ -248,8 +248,6 @@ void main() async {
     RedisConnectionSettings(
       host: 'localhost', 
       port: 7001,
-      // password: '',
-      // username: '',
     )
   ];
   final client = RedisClusterClient(nodes);
@@ -275,7 +273,10 @@ import 'package:typeredis/typeredis.dart';
 
 void main() async {
   final nodes = [
-    ValkeyConnectionSettings(host: 'localhost', port: 7001)
+    ValkeyConnectionSettings(
+      host: 'localhost', 
+      port: 7001,
+    )
   ];
   final client = ValkeyClusterClient(nodes);
   try {
