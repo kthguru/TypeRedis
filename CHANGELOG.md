@@ -8,6 +8,7 @@
     * **New aliases**: Added complete alias set for Dragonfly.
       * **Dragonfly**: `DragonflyClient`, `DragonflyClusterClient`, `DragonflyPool`, `DragonflyConnectionSettings`, `DragonflyLogLevel`, `DragonflyMessage`, `DragonflyException`, `DragonflyConnectionException`, `DragonflyServerException`, `DragonflyClientException`, `DragonflyParsingException`.
     * **Metadata Checker**: provides server version extractor and information, etc.
+* **New commands**: Added `send()` as a shorter name for `execute()`. Internally calls `execute()`.
 
 ## 3.8.0
 * **New aliases**: Added complete alias sets for **Valkey** and **Redis** — `Client`, `ClusterClient`, `Pool`, **Exceptions**, **Configuration**, and **Data Models**.  

@@ -808,7 +808,7 @@ Future<void> main() async {
       // 2. Queue commands
       // Note: The futures complete with 'QUEUED'
       final setFuture = client.set('tx:key1', 'tx:value1');
-      final incrFuture = client.execute(['INCR', 'tx:counter']);
+      final incrFuture = client.incr('tx:counter');
 
       // Verify they are queued
       await expectLater(setFuture, completion('QUEUED'));

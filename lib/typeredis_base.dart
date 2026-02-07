@@ -157,6 +157,10 @@ abstract class TRClientBase implements TRCommandsBase {
   /// (`SUBSCRIBE`, `UNSUBSCRIBE`, etc.), as they are handled differently.
   Future<dynamic> execute(List<String> command);
 
+  /// Provides a shorter name for `execute()`.
+  /// Internally calls `execute()`.
+  Future<dynamic> send(List<String> command);
+
   /// PINGs the server.
   ///
   /// Returns 'PONG' if no [message] is provided,

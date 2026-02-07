@@ -138,7 +138,7 @@ Future<void> runCommandExamples(TRClientBase client) async {
       print("Queueing: SET tx:1 'hello'");
       final setFuture = client.set('tx:1', 'hello'); // Queued
       print('Queueing: INCR tx:counter');
-      final incrFuture = client.execute(['INCR', 'tx:counter']); // Queued
+      final incrFuture = client.incr('tx:counter'); // Queued
 
       // Await queued responses (optional)
       print('Awaited SET response: ${await setFuture}'); // Should be 'QUEUED'

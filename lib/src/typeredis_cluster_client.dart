@@ -298,7 +298,7 @@ class TRClusterClient implements TRClusterClientBase {
     try {
       client = await pool.acquire();
       // 1. Send ASKING (before the actual command)
-      await client.execute(['ASKING']);
+      await client.execute(['ASKING']); // TODO: [refactor] change to API
       // 2. Send actual command
       return await command(client);
     } finally {
