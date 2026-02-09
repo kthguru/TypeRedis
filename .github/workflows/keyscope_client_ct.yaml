@@ -28,7 +28,7 @@ on:
       - 'dart_test.yaml'
       - 'pubspec.yaml'
       - 'analysis_options.yaml'
-      - '.github/workflows/typeredis_ct.yaml'
+      - '.github/workflows/keyscope_client_ct.yaml'
 
   # pull_request:
 
