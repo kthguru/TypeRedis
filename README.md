@@ -488,7 +488,8 @@ Traditional clients often rely on sending raw command lists. While flexible, thi
 
 ```dart
 // ⚠️ Is it 'GET' or 'get'? Did I pass the key as a list or string?
-final value = await client.send_command(['GET', 'my_key']); 
+// Uses raw send() or execute() method without type safety.
+final value = await client.send(['GET', 'my_key']); 
 ```
 
 **Scenario 2: The "Memory Test" Problem**
@@ -497,7 +498,7 @@ final value = await client.send_command(['GET', 'my_key']);
 
 ```dart
 // ⚠️ Hard to read. Easy to typo 'AGGREGATION'. What does '1000' mean?
-await client.send_command([
+await client.send([
   'TS.MRANGE', '-', '+', 'FILTER', 'label=cpu', 
   'AGGREGATION', 'avg', '1000'
 ]);
