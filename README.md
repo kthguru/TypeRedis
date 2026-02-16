@@ -468,7 +468,7 @@ void main() async {
 | **Pub/Sub Ready (Standalone/Sentinel)** | `subscribe()` returns a `Subscription` object with a `Stream` and a `Future<void> ready` for easy and reliable message handling. |
 | **Production-Ready** | **Standalone/Sentinel:** Stable for production use.<br>**Cluster:** Stable for production use with full cluster support. |
 
-## Why keyscope_client?
+<!-- ## Why keyscope_client?
 
 While existing tools are heavy (Electron-based) or lack support for modern features, the [Keyscope GUI](https://pub.dev/packages/keyscope) runs natively with built-in multilingual support. **keyscope_client** brings that same philosophy to your code.
 
@@ -551,4 +551,4 @@ Just like the **[Keyscope GUI](https://pub.dev/packages/keyscope)**, this client
 
 **keyscope_client** respects your infrastructure choices. Whether you run **[Redis](https://redis.io)**, **[Valkey](https://valkey.io)**, or **[Dragonfly](https://www.dragonflydb.io/)**, simply choose the alias that matches your backend (`RedisClient`, `ValkeyClient`, `DragonflyClient`).
 
-**One Unified API:** Switch identities seamlessly to match your evolving infrastructure without rewriting a single line of your business logic.
+**One Unified API:** Switch identities seamlessly to match your evolving infrastructure without rewriting a single line of your business logic. -->

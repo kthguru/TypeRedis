@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-export '../extensions/server_version_check.dart' show ServerVersionCheck;
-export 'commands/v_add.dart';
-export 'commands/v_card.dart';
-export 'commands/v_dim.dart';
-export 'commands/v_emb.dart';
-export 'commands/v_get_attr.dart';
-export 'commands/v_info.dart';
-export 'commands/v_is_member.dart';
-export 'commands/v_links.dart';
-export 'commands/v_rand_member.dart';
-export 'commands/v_range.dart';
-export 'commands/v_rem.dart';
-export 'commands/v_set_attr.dart';
-export 'commands/v_sim.dart';
+import '../commands.dart' show ServerVersionCheck, VectorSetCommands;
+
+extension VRemCommand on VectorSetCommands {
+  /// VREM key id
+  ///
+  /// Removes a vector from the set by ID.
+  ///
+  /// [key]: The key of the vector set.
+  /// [id]: The ID of the vector to remove.
+  /// [forceRun]: Force execution on Valkey.
+  Future<int> vRem(
+    String key,
+    String id, {
+    bool forceRun = false,
+  }) async {
+    await checkValkeySupport('VREM', forceRun: forceRun);
+    return executeInt(['VREM', key, id]);
+  }
+}

@@ -304,6 +304,22 @@ extension ServerVersionCheck on Commands {
       'TS.REVRANGE'
     ];
 
+    final vectorSetCommands = [
+      'VADD',
+      'VCARD',
+      'VDIM',
+      'VEMB',
+      'VGETATTR',
+      'VINFO',
+      'VISMEMBER',
+      'VLINKS',
+      'VRANDMEMBER',
+      'VRANGE',
+      'VREM',
+      'VSETATTR',
+      'VSIM'
+    ];
+
     final hashCommands = [
       'HGETDEL',
     ];
@@ -319,6 +335,7 @@ extension ServerVersionCheck on Commands {
     return switch (commandName) {
       _ when searchCommands.contains(commandName) => true,
       _ when timeSeriesCommands.contains(commandName) => true,
+      _ when vectorSetCommands.contains(commandName) => true,
       _ when hashCommands.contains(commandName) => true,
       _ when jsonCommands.contains(commandName) => true,
       _ when stringCommands.contains(commandName) => true,

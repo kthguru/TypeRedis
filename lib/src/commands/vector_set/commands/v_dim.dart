@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-export '../extensions/server_version_check.dart' show ServerVersionCheck;
-export 'commands/v_add.dart';
-export 'commands/v_card.dart';
-export 'commands/v_dim.dart';
-export 'commands/v_emb.dart';
-export 'commands/v_get_attr.dart';
-export 'commands/v_info.dart';
-export 'commands/v_is_member.dart';
-export 'commands/v_links.dart';
-export 'commands/v_rand_member.dart';
-export 'commands/v_range.dart';
-export 'commands/v_rem.dart';
-export 'commands/v_set_attr.dart';
-export 'commands/v_sim.dart';
+import '../commands.dart' show ServerVersionCheck, VectorSetCommands;
+
+extension VDimCommand on VectorSetCommands {
+  /// VDIM key
+  ///
+  /// Returns the dimension of the vectors in the set.
+  ///
+  /// [key]: The key of the vector set.
+  /// [forceRun]: Force execution on Valkey.
+  Future<int> vDim(
+    String key, {
+    bool forceRun = false,
+  }) async {
+    await checkValkeySupport('VDIM', forceRun: forceRun);
+    return executeInt(['VDIM', key]);
+  }
+}

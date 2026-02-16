@@ -4,10 +4,6 @@
 * **Modular Architecture**
     * **New VECTOR SET Commands**
         * Added a full suite of VECTOR SET commands: `vAdd`, `vCard`, `vDim`, `vEmb`, `vGetAttr`, `vInfo`, `vIsMember`, `vLinks`, `vRandMember`, `vRange`, `vRem`, `vSetAttr`, `vSim`
-    * **Enhanced TIME SERIES Commands**
-        * Updated TIME SERIES command parameter handling.
-        * Previously limited to `options: []`, now supports explicit variables for all parameters.
-        * Enables developers to pass parameters more flexibly and write cleaner, type-safe code.
 
 ## 4.2.0
 * **Modular Architecture**

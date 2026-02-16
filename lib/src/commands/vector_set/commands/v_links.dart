@@ -14,6 +14,22 @@
  * limitations under the License.
  */
 
-import '../commands.dart' show VectorSetCommands;
+import '../commands.dart' show ServerVersionCheck, VectorSetCommands;
 
-extension VSTemplateCommand on VectorSetCommands {}
+extension VLinksCommand on VectorSetCommands {
+  /// VLINKS key id
+  ///
+  /// Returns the links (connectivity) of a node in the index (HNSW context).
+  ///
+  /// [key]: The key of the vector set.
+  /// [id]: The vector ID.
+  /// [forceRun]: Force execution on Valkey.
+  Future<dynamic> vLinks(
+    String key,
+    String id, {
+    bool forceRun = false,
+  }) async {
+    await checkValkeySupport('VLINKS', forceRun: forceRun);
+    return execute(['VLINKS', key, id]);
+  }
+}
