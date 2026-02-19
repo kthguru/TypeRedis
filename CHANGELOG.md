@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.4.1
+* **Modular Architecture**
+    * **New CUCKOO FILTER Commands**
+        * Added a full suite of CUCKOO FILTER commands: `cfAdd`, `cfAddNx`, `cfCount`, `cfDel`, `cfExists`, `cfInfo`, `cfInsert`, `cfInsertNx`, `cfLoadChunk`, `cfMExists`, `cfReserve`, `cfScanDump`
+
 ## 4.4.0
 * **Modular Architecture**
     * **New BLOOM FILTER Commands**: 
