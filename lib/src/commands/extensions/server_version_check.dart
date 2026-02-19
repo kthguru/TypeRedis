@@ -47,29 +47,29 @@ extension ServerVersionCheck on Commands {
     }
   }
 
-  // /// Internal helper to get the minor version (e.g., "7.2.4" -> 2).
-  // Future<int> get _minorVersion async {
-  //   try {
-  //     final metadata = await getOrFetchMetadata();
-  //     if (metadata.version.isEmpty) return 0;
-  //     final parts = metadata.version.split('.');
-  //     return parts.length > 1 ? int.parse(parts[1]) : 0;
-  //   } catch (_) {
-  //     return 0;
-  //   }
-  // }
+  /// Internal helper to get the minor version (e.g., "7.2.4" -> 2).
+  Future<int> get _minorVersion async {
+    try {
+      final metadata = await getOrFetchMetadata();
+      if (metadata.version.isEmpty) return 0;
+      final parts = metadata.version.split('.');
+      return parts.length > 1 ? int.parse(parts[1]) : 0;
+    } catch (_) {
+      return 0;
+    }
+  }
 
-  // /// Internal helper to get the patch version (e.g., "7.2.4" -> 4).
-  // Future<int> get _patchVersion async {
-  //   try {
-  //     final metadata = await getOrFetchMetadata();
-  //     if (metadata.version.isEmpty) return 0;
-  //     final parts = metadata.version.split('.');
-  //     return parts.length > 2 ? int.parse(parts[2]) : 0;
-  //   } catch (_) {
-  //     return 0;
-  //   }
-  // }
+  /// Internal helper to get the patch version (e.g., "7.2.4" -> 4).
+  Future<int> get _patchVersion async {
+    try {
+      final metadata = await getOrFetchMetadata();
+      if (metadata.version.isEmpty) return 0;
+      final parts = metadata.version.split('.');
+      return parts.length > 2 ? int.parse(parts[2]) : 0;
+    } catch (_) {
+      return 0;
+    }
+  }
 
   /// Internal helper to check server name.
   Future<bool> get _isRedis async =>
@@ -90,6 +90,21 @@ extension ServerVersionCheck on Commands {
   // ---------------------------------------------------------------------------
   // Public Version Checkers
   // ---------------------------------------------------------------------------
+  // e.g., Redis Open Source 8.0.0
+
+  // Redis Community Edition (Redis CE) was renamed to Redis Open Source with
+  // the v8.0 release.
+
+  // See also:
+  // - https://redis.io/docs/latest/operate/rs/release-notes/rs-7-4-2-releases/rs-7-4-2-54/
+  // - https://github.com/redis/redis
+  // - https://redis.io/software/
+  // - https://redis.io/docs/latest/develop/clients/
+  // - https://redis.io/docs/latest/operate/oss_and_stack/stack-with-enterprise/release-notes/
+  // - https://redis.io/docs/latest/develop/data-types/bitfields/
+
+  Future<bool> isRedis800rLater() async =>
+      (await _isRedis) && (await _majorVersion) >= 8;
 
   /// Returns true if the server is Redis and version is 7.0.0 or later.
   Future<bool> isRedis70OrLater() async =>
@@ -225,166 +240,263 @@ extension ServerVersionCheck on Commands {
       {bool forceRun = false}) async {
     if (forceRun) return;
 
-    final redis = await isRedis;
-    final valkey = await isValkey;
     final serverName = await getServerName;
-    // final serverType
 
-    final isRedisOnly = await isRedisOnlyCommand(commandName, subCommandName);
-    final isValkeyOnly = await isValkeyOnlyCommand(commandName, subCommandName);
+    final isValid =
+        await doIntegratedCommandChecker(commandName, subCommandName);
 
-    var isInvalid = false;
-    if (redis && isValkeyOnly) {
-      isInvalid = true;
-    } else if (valkey && isRedisOnly) {
-      isInvalid = true;
-    }
-
-    final serverType = serverName.capitalize();
-
-    if (isInvalid) {
+    if (!isValid) {
+      final serverType = serverName.capitalize();
       throw KeyscopeServerException('Command $commandName '
           '${subCommandName.isNotEmpty ? subCommandName : ''} '
           'is not supported in your $serverType server. '
           'Pass `forceRun: true` to execute it for development reasons.');
     }
-    // NOTE:
-    // In Valkey,
-    // Error: KeyscopeServerException(ERR): ERR unknown command 'FT.AGGREGATE',
-    //        with args beginning with: 'index' ''
   }
 
-  Future<bool> isRedisOnlyCommand(
-      String commandName, String? subCommandName) async {
-    final searchCommands = [
-      'FT.AGGREGATE',
-      'FT.ALIASADD',
-      'FT.ALIASDEL',
-      'FT.ALIASUPDATE',
-      'FT.ALTER',
-      'FT.CONFIG GET', // TODO: v4.2.1
-      'FT.CONFIG SET', // TODO: v4.2.1
-      // 'FT.CREATE',
-      'FT.CURSOR DEL', // TODO: v4.2.1
-      'FT.CURSOR READ', // TODO: v4.2.1
-      'FT.DICTADD',
-      'FT.DICTDEL',
-      'FT.DICTDUMP',
-      // 'FT.DROPINDEX',
-      'FT.EXPLAIN',
-      'FT.EXPLAINCLI',
-      'FT.HYBRID',
-      // 'FT.INFO',
-      // 'FT._LIST',
-      'FT.PROFILE',
-      // 'FT.SEARCH',
-      'FT.SPELLCHECK',
-      'FT.SYNDUMP',
-      'FT.SYNUPDATE',
-      'FT.TAGVALS'
-    ];
+  Future<bool> doIntegratedCommandChecker(
+      String commandName, String? subCommandName,
+      {bool useThrow = true}) async {
+    // 1. Command Registry (Map<Command, Map<System, Version>>)
+    //
+    final commandRegistry = <String, Map<String, List<int>>>{
+      // VECTOR SET
 
-    final timeSeriesCommands = [
-      'TS.ADD',
-      'TS.ALTER',
-      'TS.CREATE',
-      'TS.CREATERULE',
-      'TS.DECRBY',
-      'TS.DEL',
-      'TS.DELETERULE',
-      'TS.GET',
-      'TS.INCRBY',
-      'TS.INFO',
-      'TS.MADD',
-      'TS.MGET',
-      'TS.MRANGE',
-      'TS.MREVRANGE',
-      'TS.QUERYINDEX',
-      'TS.RANGE',
-      'TS.REVRANGE'
-    ];
-
-    final vectorSetCommands = [
-      'VADD',
-      'VCARD',
-      'VDIM',
-      'VEMB',
-      'VGETATTR',
-      'VINFO',
-      'VISMEMBER',
-      'VLINKS',
-      'VRANDMEMBER',
-      'VRANGE',
-      'VREM',
-      'VSETATTR',
-      'VSIM'
-    ];
-
-    final hashCommands = [
-      'HGETDEL',
-    ];
-    // const jsonDebugCommand = 'JSON.DEBUG';
-
-    final jsonCommands = [
-      'JSON.MERGE',
-      // jsonDebugCommand
-    ];
-
-    final stringCommands = ['DELEX', 'DIGEST', 'MSETEX'];
-
-    return switch (commandName) {
-      _ when searchCommands.contains(commandName) => true,
-      _ when timeSeriesCommands.contains(commandName) => true,
-      _ when vectorSetCommands.contains(commandName) => true,
-      _ when hashCommands.contains(commandName) => true,
-      _ when jsonCommands.contains(commandName) => true,
-      _ when stringCommands.contains(commandName) => true,
-      // _ when jsonCommands.contains(commandName) =>
-      //   switch (subCommandName) {
-      //     _ when jsonSubCommands.contains(subCommandName) => true,
-      //     _ => false,
-      //   },
-      _ => false,
-    };
-  }
-
-  /// [commandName]: if provided, check it.
-  /// [subCommandName]: if provided, check it with [commandName].
-  Future<bool> isValkeyOnlyCommand(
-      String commandName, String? subCommandName) async {
-    const jsonDebugCommand = 'JSON.DEBUG';
-
-    // final jsonCommands = [
-    //   jsonDebugCommand,
-    // ];
-
-    final jsonSubCommands = [
-      'DEPTH',
-      'FIELDS',
-      'KEYTABLE-CHECK',
-      'KEYTABLE-CORRUPT',
-      'KEYTABLE-DISTRIBUTION',
-      'MAX-DEPTH-KEY',
-      'MAX-SIZE-KEY',
-      'TEST-SHARED-API'
-    ];
-
-    final stringCommands = [
-      'DELIFEQ',
-    ];
-
-    return switch (commandName) {
-      jsonDebugCommand => switch (subCommandName) {
-          _ when jsonSubCommands.contains(subCommandName) => true,
-          _ => false,
+      for (var cmd in {
+        'VADD',
+        'VCARD',
+        'VDIM',
+        'VEMB',
+        'VGETATTR',
+        'VINFO',
+        'VISMEMBER',
+        'VLINKS',
+        'VRANDMEMBER',
+        'VREM',
+        'VSETATTR',
+        'VSIM'
+      })
+        cmd: {
+          'redis': [8, 0, 0]
         },
-      _ when stringCommands.contains(commandName) => true,
-      // _ when jsonCommands.contains(commandName) =>
-      //   switch (subCommandName) {
-      //     _ when jsonSubCommands.contains(subCommandName) => true,
-      //     _ => false,
-      //   },
-      _ => false,
+      'VRANGE': {
+        'redis': [8, 4, 0]
+      },
+
+      // SEARCH
+
+      // TODO: RedisSearch? RediSearch? Which one is right?
+      // <search> Redis version found by RedisSearch : 8.4.0 - oss
+      // <search> RediSearch version 8.4.2 (Git=9e2b676)
+
+      for (var cmd in {
+        'FT.ALIASADD',
+        'FT.ALIASDEL',
+        'FT.ALIASUPDATE',
+        'FT.ALTER',
+        'FT.TAGVALS',
+        'FT.EXPLAIN',
+        'FT.EXPLAINCLI',
+
+        // TODO: from/to or since/until
+        'FT.CONFIG GET', // Deprecated(Search 8.0.0+). Replaced by CONFIG GET
+        'FT.CONFIG SET', // Deprecated(Search 8.0.0+). Replaced by CONFIG SET
+
+        // TODO: separate main and module
+      })
+        cmd: {
+          'redis': [1, 0, 0], // Redis Open Source / Search
+        },
+
+      for (var cmd in {
+        'FT.CREATE',
+        'FT.INFO',
+        'FT.SEARCH',
+      })
+        cmd: {
+          'redis': [1, 0, 0], // Redis Open Source / Search
+          'valkey': [
+            1,
+            0,
+            0
+          ] // Module / https://github.com/valkey-io/valkey-search
+        },
+
+      for (var cmd in {
+        'FT.AGGREGATE',
+        'FT.CURSOR DEL',
+        'FT.CURSOR READ',
+      })
+        cmd: {
+          'redis': [1, 1, 0], // Redis Open Source / Search
+        },
+
+      for (var cmd in {
+        'FT.SYNDUMP',
+        'FT.SYNUPDATE',
+      })
+        cmd: {
+          'redis': [1, 2, 0], // Redis Open Source / Search
+        },
+
+      for (var cmd in {
+        'FT.DICTADD',
+        'FT.DICTDEL',
+        'FT.DICTDUMP',
+        'FT.SPELLCHECK',
+      })
+        cmd: {
+          'redis': [1, 4, 0], // Redis Open Source / Search
+        },
+
+      for (var cmd in {
+        'FT.DROPINDEX',
+        'FT._LIST',
+      })
+        cmd: {
+          'redis': [2, 0, 0], // Redis Open Source / Search
+          'valkey': [
+            1,
+            0,
+            0
+          ] // Module / https://github.com/valkey-io/valkey-search
+        },
+
+      for (var cmd in {
+        'FT.PROFILE',
+      })
+        cmd: {
+          'redis': [2, 2, 0], // Redis Open Source / Search
+        },
+
+      for (var cmd in {
+        'FT.HYBRID',
+      })
+        cmd: {
+          'redis': [8, 4, 0], // Redis Open Source
+        },
+
+      // JSON
+
+      'JSON.MERGE': {
+        'redis': [2, 6, 0] // Redis Open Source / JSON
+      },
+
+      for (var cmd in {'JSON.DEBUG HELP', 'JSON.DEBUG MEMORY'})
+        cmd: {
+          'redis': [1, 0, 0], // Redis Open Source / JSON
+          'valkey': [
+            1,
+            0,
+            0
+          ] // Module / https://github.com/valkey-io/valkey-json
+        },
+
+      for (var cmd in {
+        'DEPTH',
+        'FIELDS',
+        'KEYTABLE-CHECK',
+        'KEYTABLE-CORRUPT',
+        'KEYTABLE-DISTRIBUTION',
+        'MAX-DEPTH-KEY',
+        'MAX-SIZE-KEY',
+        'TEST-SHARED-API',
+      })
+        cmd: {'valkey': []},
+
+      // TIME SERIES
+
+      for (var cmd in {
+        'TS.ADD',
+        'TS.ALTER',
+        'TS.CREATE',
+        'TS.CREATERULE',
+        'TS.DECRBY',
+        'TS.DEL',
+        'TS.DELETERULE',
+        'TS.GET',
+        'TS.INCRBY',
+        'TS.INFO',
+        'TS.MADD',
+        'TS.MGET',
+        'TS.MRANGE',
+        'TS.MREVRANGE',
+        'TS.QUERYINDEX',
+        'TS.RANGE',
+        'TS.REVRANGE'
+      })
+        cmd: {'redis': []},
+
+      // HASH
+
+      'HGETDEL': {
+        'redis': [8, 0, 0] // Redis Open Source
+      },
+
+      // STRING
+
+      for (var cmd in {'MSET'})
+        cmd: {
+          'redis': [1, 0, 1], // Redis Open Source
+          'valkey': [1, 0, 1]
+        },
+
+      for (var cmd in {'DELEX', 'DIGEST', 'MSETEX'})
+        cmd: {
+          'redis': [8, 4, 0] // Redis Open Source
+        },
+
+      'DELIFEQ': {
+        'valkey': [9, 0, 0]
+      },
     };
+
+    final currentSystem = await getServerName;
+
+    Map<String, List<int>>? targetSpecs;
+
+    if (subCommandName != null) {
+      targetSpecs = commandRegistry['$commandName $subCommandName'];
+    }
+    targetSpecs ??= commandRegistry[commandName];
+
+    if (targetSpecs == null) {
+      return false; // Command not found
+    }
+
+    final requiredVersion = targetSpecs[currentSystem];
+
+    if (requiredVersion == null) {
+      if (useThrow) {
+        throw UnsupportedError('Command $commandName is not supported on '
+            '${currentSystem.capitalize()}.');
+      }
+      return false;
+    }
+
+    Future<bool> checkVersion() async {
+      if (requiredVersion.isEmpty) return true;
+
+      final rMajor = requiredVersion[0];
+      final rMinor = requiredVersion.length > 1 ? requiredVersion[1] : 0;
+      final rPatch = requiredVersion.length > 2 ? requiredVersion[2] : 0;
+
+      if (await _majorVersion < rMajor) return false;
+      if (await _majorVersion > rMajor) return true;
+      if (await _minorVersion < rMinor) return false;
+      if (await _minorVersion > rMinor) return true;
+      return await _patchVersion >= rPatch;
+    }
+
+    if (!await checkVersion()) {
+      if (useThrow) {
+        throw UnsupportedError('Unsupported command: $commandName. '
+            'Requires ${currentSystem.capitalize()} '
+            'version ${requiredVersion.join('.')}.');
+      }
+      return false;
+    }
+
+    return true;
   }
 }
