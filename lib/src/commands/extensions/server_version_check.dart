@@ -466,7 +466,8 @@ extension ServerVersionCheck on Commands {
 
     final requiredVersion = targetSpecs[currentSystem];
 
-    final fullCommand = subCommandName == null ? commandName : '$commandName $subCommandName';
+    final fullCommand =
+        subCommandName == null ? commandName : '$commandName $subCommandName';
 
     if (requiredVersion == null) {
       if (useThrow) {
