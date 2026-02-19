@@ -20,18 +20,50 @@ import 'package:test/test.dart';
 void main() {
   group('Vector Set - Attributes & Retrieval', () {
     late KeyscopeClient client;
+    var isRedis = false;
+    const port = 6379;
+
+    setUpAll(() async {
+      final tempClient = KeyscopeClient(host: 'localhost', port: port);
+      try {
+        await tempClient.connect();
+        isRedis = await tempClient.isRedisServer();
+      } catch (e) {
+        print('Warning: Failed to check server type in setUpAll: $e');
+      } finally {
+        await tempClient.close();
+      }
+    });
 
     setUp(() async {
-      client = KeyscopeClient(host: 'localhost', port: 6379);
+      client = KeyscopeClient(host: 'localhost', port: port);
       await client.connect();
       await client.flushAll();
     });
 
     tearDown(() async {
+      if (isRedis) {
+        try {
+          if (client.isConnected) {
+            await client.close();
+          }
+        } catch (_) {}
+      }
+
       await client.disconnect();
     });
 
-    test('Attributes Management (VSETATTR, VGETATTR)', () async {
+    void testRedis(String description, Future<void> Function() body) {
+      test(description, () async {
+        if (!isRedis) {
+          markTestSkipped('Skipping: This feature is supported on Redis only.');
+          return;
+        }
+        await body();
+      });
+    }
+
+    testRedis('Attributes Management (VSETATTR, VGETATTR)', () async {
       const key = 'vec:products';
       const id = 'prod:1';
 
@@ -64,7 +96,7 @@ void main() {
       expect(attrs?['price'].toString(), equals('100'));
     });
 
-    test('Embedding & Random Member (VEMB, VRANDMEMBER)', () async {
+    testRedis('Embedding & Random Member (VEMB, VRANDMEMBER)', () async {
       // Use a unique key name to avoid "Quantization mismatch"
       // with debris from previous failed runs (which might be Q8).
       // Use a clean key

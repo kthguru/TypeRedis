@@ -20,6 +20,20 @@ import 'package:test/test.dart';
 void main() {
   group('Vector Set - Basic Lifecycle', () {
     late KeyscopeClient client;
+    var isRedis = false;
+    const port = 6379;
+
+    setUpAll(() async {
+      final tempClient = KeyscopeClient(host: 'localhost', port: port);
+      try {
+        await tempClient.connect();
+        isRedis = await tempClient.isRedisServer();
+      } catch (e) {
+        print('Warning: Failed to check server type in setUpAll: $e');
+      } finally {
+        await tempClient.close();
+      }
+    });
 
     setUp(() async {
       client = KeyscopeClient(host: 'localhost', port: 6379);
@@ -28,10 +42,28 @@ void main() {
     });
 
     tearDown(() async {
+      if (isRedis) {
+        try {
+          if (client.isConnected) {
+            await client.close();
+          }
+        } catch (_) {}
+      }
+
       await client.disconnect();
     });
 
-    test('Add, Count, and Dimension', () async {
+    void testRedis(String description, Future<void> Function() body) {
+      test(description, () async {
+        if (!isRedis) {
+          markTestSkipped('Skipping: This feature is supported on Redis only.');
+          return;
+        }
+        await body();
+      });
+    }
+
+    testRedis('Add, Count, and Dimension', () async {
       const key = 'vec:users';
 
       // 1. VADD (Add vectors)
@@ -49,7 +81,7 @@ void main() {
       expect(dim, equals(3));
     });
 
-    test('Membership, Info, and Removal', () async {
+    testRedis('Membership, Info, and Removal', () async {
       const key = 'vec:items';
       // ID passed as positional argument
       await client.vAdd(key, [1.0, 0.0], 'item:A');

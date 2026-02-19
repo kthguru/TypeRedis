@@ -20,6 +20,20 @@ import 'package:test/test.dart';
 void main() {
   group('Vector Set - Similarity & Search', () {
     late KeyscopeClient client;
+    var isRedis = false;
+    const port = 6379;
+
+    setUpAll(() async {
+      final tempClient = KeyscopeClient(host: 'localhost', port: port);
+      try {
+        await tempClient.connect();
+        isRedis = await tempClient.isRedisServer();
+      } catch (e) {
+        print('Warning: Failed to check server type in setUpAll: $e');
+      } finally {
+        await tempClient.close();
+      }
+    });
 
     setUp(() async {
       client = KeyscopeClient(host: 'localhost', port: 6379);
@@ -28,10 +42,28 @@ void main() {
     });
 
     tearDown(() async {
+      if (isRedis) {
+        try {
+          if (client.isConnected) {
+            await client.close();
+          }
+        } catch (_) {}
+      }
+
       await client.disconnect();
     });
 
-    test('Vector Similarity (VSIM)', () async {
+    void testRedis(String description, Future<void> Function() body) {
+      test(description, () async {
+        if (!isRedis) {
+          markTestSkipped('Skipping: This feature is supported on Redis only.');
+          return;
+        }
+        await body();
+      });
+    }
+
+    testRedis('Vector Similarity (VSIM)', () async {
       const key = 'vec:sim';
       // vAdd arguments: (key, vector, id) - ID is positional
       await client.vAdd(key, [1.0, 0.0], 'v1');
@@ -83,7 +115,7 @@ void main() {
       expect(neighborsOfV3, contains('v3'));
     });
 
-    test('Lexical Range Iteration (VRANGE)', () async {
+    testRedis('Lexical Range Iteration (VRANGE)', () async {
       const key = 'vec:iter';
 
       await client.vAdd(key, [0.1], 'item:2');
@@ -104,7 +136,7 @@ void main() {
       expect(allItems[2], equals('item:3'));
     });
 
-    test('Graph Connectivity (VLINKS)', () async {
+    testRedis('Graph Connectivity (VLINKS)', () async {
       const key = 'vec:links';
       await client.vAdd(key, [0.5, 0.5], 'node1');
 
