@@ -37,7 +37,7 @@ void main() {
 
     // Standard Setup: Connect to local instance and flush database
     setUp(() async {
-      client = KeyscopeClient(host: 'localhost', port: 6379);
+      client = KeyscopeClient(host: 'localhost', port: port);
       await client.connect();
       await client.flushAll();
     });
