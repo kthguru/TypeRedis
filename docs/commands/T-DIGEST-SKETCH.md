@@ -18,17 +18,17 @@ limitations under the License.
 
 | keyscope_client      | Redis                                                                               | Valkey | Google Memorystore |
 |----------------------|-------------------------------------------------------------------------------------|--------|--------------------|
-| `tDigestAdd`         | [TDIGEST.ADD](https://redis.io/docs/latest/commands/tdigest.add/)                   |        |
-| `tDigestByRank`      | [TDIGEST.BYRANK](https://redis.io/docs/latest/commands/tdigest.byrank/)             |        |
-| `tDigestByRevRank`   | [TDIGEST.BYREVRANK](https://redis.io/docs/latest/commands/tdigest.byrevrank/)       |        |
-| `tDigestCdf`         | [TDIGEST.CDF](https://redis.io/docs/latest/commands/tdigest.cdf/)                   |        |
-| `tDigestCreate`      | [TDIGEST.CREATE](https://redis.io/docs/latest/commands/tdigest.create/)             |        |
-| `tDigestInfo`        | [TDIGEST.INFO](https://redis.io/docs/latest/commands/tdigest.info/)                 |        |
-| `tDigestMax`         | [TDIGEST.MAX](https://redis.io/docs/latest/commands/tdigest.max/)                   |        |
-| `tDigestMerge`       | [TDIGEST.MERGE](https://redis.io/docs/latest/commands/tdigest.merge/)               |        |
-| `tDigestMin`         | [TDIGEST.MIN](https://redis.io/docs/latest/commands/tdigest.min/)                   |        |
-| `tDigestQuantile`    | [TDIGEST.QUANTILE](https://redis.io/docs/latest/commands/tdigest.quantile/)         |        |
-| `tDigestRank`        | [TDIGEST.RANK](https://redis.io/docs/latest/commands/tdigest.rank/)                 |        |
-| `tDigestReset`       | [TDIGEST.RESET](https://redis.io/docs/latest/commands/tdigest.reset/)               |        |
-| `tDigestRevRank`     | [TDIGEST.REVRANK](https://redis.io/docs/latest/commands/tdigest.revrank/)           |        |
-| `tDigestTrimmedMean` | [TDIGEST.TRIMMED_MEAN](https://redis.io/docs/latest/commands/tdigest.trimmed_mean/) |        |
+| `tDigestAdd`         | [TDIGEST.ADD](https://redis.io/docs/latest/commands/tdigest.add/)                   |        | |
+| `tDigestByRank`      | [TDIGEST.BYRANK](https://redis.io/docs/latest/commands/tdigest.byrank/)             |        | |
+| `tDigestByRevRank`   | [TDIGEST.BYREVRANK](https://redis.io/docs/latest/commands/tdigest.byrevrank/)       |        | |
+| `tDigestCdf`         | [TDIGEST.CDF](https://redis.io/docs/latest/commands/tdigest.cdf/)                   |        | |
+| `tDigestCreate`      | [TDIGEST.CREATE](https://redis.io/docs/latest/commands/tdigest.create/)             |        | |
+| `tDigestInfo`        | [TDIGEST.INFO](https://redis.io/docs/latest/commands/tdigest.info/)                 |        | |
+| `tDigestMax`         | [TDIGEST.MAX](https://redis.io/docs/latest/commands/tdigest.max/)                   |        | |
+| `tDigestMerge`       | [TDIGEST.MERGE](https://redis.io/docs/latest/commands/tdigest.merge/)               |        | |
+| `tDigestMin`         | [TDIGEST.MIN](https://redis.io/docs/latest/commands/tdigest.min/)                   |        | |
+| `tDigestQuantile`    | [TDIGEST.QUANTILE](https://redis.io/docs/latest/commands/tdigest.quantile/)         |        | |
+| `tDigestRank`        | [TDIGEST.RANK](https://redis.io/docs/latest/commands/tdigest.rank/)                 |        | |
+| `tDigestReset`       | [TDIGEST.RESET](https://redis.io/docs/latest/commands/tdigest.reset/)               |        | |
+| `tDigestRevRank`     | [TDIGEST.REVRANK](https://redis.io/docs/latest/commands/tdigest.revrank/)           |        | |
+| `tDigestTrimmedMean` | [TDIGEST.TRIMMED_MEAN](https://redis.io/docs/latest/commands/tdigest.trimmed_mean/) |        | |

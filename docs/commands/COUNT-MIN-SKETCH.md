@@ -18,9 +18,9 @@ limitations under the License.
 
 | keyscope_client | Redis                                                                   | Valkey | Google Memorystore |
 |-----------------|-------------------------------------------------------------------------|--------|--------------------|
-| `cmsIncrBy`     | [CMS.INCRBY](https://redis.io/docs/latest/commands/cms.incrby/)         |        |
-| `cmsInfo`       | [CMS.INFO](https://redis.io/docs/latest/commands/cms.info/)             |        |
-| `cmsInitByDim`  | [CMS.INITBYDIM](https://redis.io/docs/latest/commands/cms.initbydim/)   |        |
-| `cmsInitByProb` | [CMS.INITBYPROB](https://redis.io/docs/latest/commands/cms.initbyprob/) |        |
-| `cmsMerge`      | [CMS.MERGE](https://redis.io/docs/latest/commands/cms.merge/)           |        |
-| `cmsQuery`      | [CMS.QUERY](https://redis.io/docs/latest/commands/cms.query/)           |        |
+| `cmsIncrBy`     | [CMS.INCRBY](https://redis.io/docs/latest/commands/cms.incrby/)         |        | |
+| `cmsInfo`       | [CMS.INFO](https://redis.io/docs/latest/commands/cms.info/)             |        | |
+| `cmsInitByDim`  | [CMS.INITBYDIM](https://redis.io/docs/latest/commands/cms.initbydim/)   |        | |
+| `cmsInitByProb` | [CMS.INITBYPROB](https://redis.io/docs/latest/commands/cms.initbyprob/) |        | |
+| `cmsMerge`      | [CMS.MERGE](https://redis.io/docs/latest/commands/cms.merge/)           |        | |
+| `cmsQuery`      | [CMS.QUERY](https://redis.io/docs/latest/commands/cms.query/)           |        | |
