@@ -15,10 +15,10 @@
  */
 
 export '../extensions/server_version_check.dart' show ServerVersionCheck;
-export 'commands/top_k_add.dart';
-export 'commands/top_k_count.dart';
-export 'commands/top_k_incr_by.dart';
-export 'commands/top_k_info.dart';
-export 'commands/top_k_list.dart';
-export 'commands/top_k_query.dart';
-export 'commands/top_k_reserve.dart';
+export 'commands/topk_add.dart';
+export 'commands/topk_count.dart';
+export 'commands/topk_incr_by.dart';
+export 'commands/topk_info.dart';
+export 'commands/topk_list.dart';
+export 'commands/topk_query.dart';
+export 'commands/topk_reserve.dart';
