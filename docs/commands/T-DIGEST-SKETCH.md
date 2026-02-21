@@ -16,8 +16,8 @@ limitations under the License.
 
 # T-DIGEST SKETCH
 
-| keyscope_client      | Redis                                                                               | Valkey |
-|----------------------|-------------------------------------------------------------------------------------|--------|
+| keyscope_client      | Redis                                                                               | Valkey | Google Memorystore |
+|----------------------|-------------------------------------------------------------------------------------|--------|--------------------|
 | `tDigestAdd`         | [TDIGEST.ADD](https://redis.io/docs/latest/commands/tdigest.add/)                   |        |
 | `tDigestByRank`      | [TDIGEST.BYRANK](https://redis.io/docs/latest/commands/tdigest.byrank/)             |        |
 | `tDigestByRevRank`   | [TDIGEST.BYREVRANK](https://redis.io/docs/latest/commands/tdigest.byrevrank/)       |        |

@@ -16,8 +16,8 @@ limitations under the License.
 
 # VECTOR SET
 
-| keyscope_client | Redis                                                             | Valkey |
-|-----------------|-------------------------------------------------------------------|--------|
+| keyscope_client | Redis                                                             | Valkey | Google Memorystore |
+|-----------------|-------------------------------------------------------------------|--------|--------------------|
 | `vAdd`          | [VADD](https://redis.io/docs/latest/commands/vadd/)               |        |
 | `vCard`         | [VCARD](https://redis.io/docs/latest/commands/vcard/)             |        |
 | `vDim`          | [VDIM](https://redis.io/docs/latest/commands/vdim/)               |        |

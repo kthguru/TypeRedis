@@ -16,30 +16,30 @@ limitations under the License.
 
 # STREAM
 
-| keyscope_client        | Redis                                                                                 | Valkey                                                                     |
-|------------------------|---------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
-| `xAck`                 | [XACK](https://redis.io/docs/latest/commands/xack/)                                   | [XACK](https://valkey.io/commands/xack/)                                   |
-| `xAdd`                 | [XADD](https://redis.io/docs/latest/commands/xadd/)                                   | [XADD](https://valkey.io/commands/xadd/)                                   |
-| `xAutoClaim`           | [XAUTOCLAIM](https://redis.io/docs/latest/commands/xautoclaim/)                       | [XAUTOCLAIM](https://valkey.io/commands/xautoclaim/)                       |
-| `xClaim`               | [XCLAIM](https://redis.io/docs/latest/commands/xclaim/)                               | [XCLAIM](https://valkey.io/commands/xclaim/)                               |
-| `xDel`                 | [XDEL](https://redis.io/docs/latest/commands/xdel/)                                   | [XDEL](https://valkey.io/commands/xdel/)                                   |
-| `xGroup`               | [XGROUP](https://redis.io/docs/latest/commands/xgroup/)                               | [XGROUP](https://valkey.io/commands/xgroup/)                               |
-| `xGroupCreate`         | [XGROUP CREATE](https://redis.io/docs/latest/commands/xgroup-create/)                 | [XGROUP CREATE](https://valkey.io/commands/xgroup-create/)                 |
-| `xGroupCreateConsumer` | [XGROUP CREATECONSUMER](https://redis.io/docs/latest/commands/xgroup-createconsumer/) | [XGROUP CREATECONSUMER](https://valkey.io/commands/xgroup-createconsumer/) |
-| `xGroupDelConsumer`    | [XGROUP DELCONSUMER](https://redis.io/docs/latest/commands/xgroup-delconsumer/)       | [XGROUP DELCONSUMER](https://valkey.io/commands/xgroup-delconsumer/)       |
-| `xGroupDestroy`        | [XGROUP DESTROY](https://redis.io/docs/latest/commands/xgroup-destroy/)               | [XGROUP DESTROY](https://valkey.io/commands/xgroup-destroy/)               |
-| `xGroupHelp`           | [XGROUP HELP](https://redis.io/docs/latest/commands/xgroup-help/)                     | [XGROUP HELP](https://valkey.io/commands/xgroup-help/)                     |
-| `xGroupSetId`          | [XGROUP SETID](https://redis.io/docs/latest/commands/xgroup-setid/)                   | [XGROUP SETID](https://valkey.io/commands/xgroup-setid/)                   |
-| `xInfo`                | [XINFO](https://redis.io/docs/latest/commands/xinfo/)                                 | [XINFO](https://valkey.io/commands/xinfo/)                                 |
-| `xInfoConsumers`       | [XINFO CONSUMERS](https://redis.io/docs/latest/commands/xinfo-consumers/)             | [XINFO CONSUMERS](https://valkey.io/commands/xinfo-consumers/)             |
-| `xInfoGroups`          | [XINFO GROUPS](https://redis.io/docs/latest/commands/xinfo-groups/)                   | [XINFO GROUPS](https://valkey.io/commands/xinfo-groups/)                   |
-| `xInfoHelp`            | [XINFO HELP](https://redis.io/docs/latest/commands/xinfo-help/)                       | [XINFO HELP](https://valkey.io/commands/xinfo-help/)                       |
-| `xInfoStream`          | [XINFO STREAM](https://redis.io/docs/latest/commands/xinfo-stream/)                   | [XINFO STREAM](https://valkey.io/commands/xinfo-stream/)                   |
-| `xLen`                 | [XLEN](https://redis.io/docs/latest/commands/xlen/)                                   | [XLEN](https://valkey.io/commands/xlen/)                                   |
-| `xPending`             | [XPENDING](https://redis.io/docs/latest/commands/xpending/)                           | [XPENDING](https://valkey.io/commands/xpending/)                           |
-| `xRange`               | [XRANGE](https://redis.io/docs/latest/commands/xrange/)                               | [XRANGE](https://valkey.io/commands/xrange/)                               |
-| `xRead`                | [XREAD](https://redis.io/docs/latest/commands/xread/)                                 | [XREAD](https://valkey.io/commands/xread/)                                 |
-| `xReadGroup`           | [XREADGROUP](https://redis.io/docs/latest/commands/xreadgroup/)                       | [XREADGROUP](https://valkey.io/commands/xreadgroup/)                       |
-| `xRevRange`            | [XREVRANGE](https://redis.io/docs/latest/commands/xrevrange/)                         | [XREVRANGE](https://valkey.io/commands/xrevrange/)                         |
-| `xSetId`               | [XSETID](https://redis.io/docs/latest/commands/xsetid/)                               | [XSETID](https://valkey.io/commands/xsetid/)                               |
-| `xTrim`                | [XTRIM](https://redis.io/docs/latest/commands/xtrim/)                                 | [XTRIM](https://valkey.io/commands/xtrim/)                                 |
+| keyscope_client        | Redis                                                                                 | Valkey                                                                     | Google Memorystore |
+|------------------------|---------------------------------------------------------------------------------------|----------------------------------------------------------------------------|--------------------|
+| `xAck`                 | [XACK](https://redis.io/docs/latest/commands/xack/)                                   | [XACK](https://valkey.io/commands/xack/)                                   | yes |
+| `xAdd`                 | [XADD](https://redis.io/docs/latest/commands/xadd/)                                   | [XADD](https://valkey.io/commands/xadd/)                                   | yes |
+| `xAutoClaim`           | [XAUTOCLAIM](https://redis.io/docs/latest/commands/xautoclaim/)                       | [XAUTOCLAIM](https://valkey.io/commands/xautoclaim/)                       | yes |
+| `xClaim`               | [XCLAIM](https://redis.io/docs/latest/commands/xclaim/)                               | [XCLAIM](https://valkey.io/commands/xclaim/)                               | yes |
+| `xDel`                 | [XDEL](https://redis.io/docs/latest/commands/xdel/)                                   | [XDEL](https://valkey.io/commands/xdel/)                                   | yes |
+| `xGroup`               | [XGROUP](https://redis.io/docs/latest/commands/xgroup/)                               | [XGROUP](https://valkey.io/commands/xgroup/)                               | yes |
+| `xGroupCreate`         | [XGROUP CREATE](https://redis.io/docs/latest/commands/xgroup-create/)                 | [XGROUP CREATE](https://valkey.io/commands/xgroup-create/)                 | yes |
+| `xGroupCreateConsumer` | [XGROUP CREATECONSUMER](https://redis.io/docs/latest/commands/xgroup-createconsumer/) | [XGROUP CREATECONSUMER](https://valkey.io/commands/xgroup-createconsumer/) | yes |
+| `xGroupDelConsumer`    | [XGROUP DELCONSUMER](https://redis.io/docs/latest/commands/xgroup-delconsumer/)       | [XGROUP DELCONSUMER](https://valkey.io/commands/xgroup-delconsumer/)       | yes |
+| `xGroupDestroy`        | [XGROUP DESTROY](https://redis.io/docs/latest/commands/xgroup-destroy/)               | [XGROUP DESTROY](https://valkey.io/commands/xgroup-destroy/)               | yes |
+| `xGroupHelp`           | [XGROUP HELP](https://redis.io/docs/latest/commands/xgroup-help/)                     | [XGROUP HELP](https://valkey.io/commands/xgroup-help/)                     | yes |
+| `xGroupSetId`          | [XGROUP SETID](https://redis.io/docs/latest/commands/xgroup-setid/)                   | [XGROUP SETID](https://valkey.io/commands/xgroup-setid/)                   | yes |
+| `xInfo`                | [XINFO](https://redis.io/docs/latest/commands/xinfo/)                                 | [XINFO](https://valkey.io/commands/xinfo/)                                 | |
+| `xInfoConsumers`       | [XINFO CONSUMERS](https://redis.io/docs/latest/commands/xinfo-consumers/)             | [XINFO CONSUMERS](https://valkey.io/commands/xinfo-consumers/)             | yes |
+| `xInfoGroups`          | [XINFO GROUPS](https://redis.io/docs/latest/commands/xinfo-groups/)                   | [XINFO GROUPS](https://valkey.io/commands/xinfo-groups/)                   | yes |
+| `xInfoHelp`            | [XINFO HELP](https://redis.io/docs/latest/commands/xinfo-help/)                       | [XINFO HELP](https://valkey.io/commands/xinfo-help/)                       | yes |
+| `xInfoStream`          | [XINFO STREAM](https://redis.io/docs/latest/commands/xinfo-stream/)                   | [XINFO STREAM](https://valkey.io/commands/xinfo-stream/)                   | yes |
+| `xLen`                 | [XLEN](https://redis.io/docs/latest/commands/xlen/)                                   | [XLEN](https://valkey.io/commands/xlen/)                                   | yes |
+| `xPending`             | [XPENDING](https://redis.io/docs/latest/commands/xpending/)                           | [XPENDING](https://valkey.io/commands/xpending/)                           | yes |
+| `xRange`               | [XRANGE](https://redis.io/docs/latest/commands/xrange/)                               | [XRANGE](https://valkey.io/commands/xrange/)                               | yes |
+| `xRead`                | [XREAD](https://redis.io/docs/latest/commands/xread/)                                 | [XREAD](https://valkey.io/commands/xread/)                                 | yes |
+| `xReadGroup`           | [XREADGROUP](https://redis.io/docs/latest/commands/xreadgroup/)                       | [XREADGROUP](https://valkey.io/commands/xreadgroup/)                       | yes |
+| `xRevRange`            | [XREVRANGE](https://redis.io/docs/latest/commands/xrevrange/)                         | [XREVRANGE](https://valkey.io/commands/xrevrange/)                         | yes |
+| `xSetId`               | [XSETID](https://redis.io/docs/latest/commands/xsetid/)                               | [XSETID](https://valkey.io/commands/xsetid/)                               | |
+| `xTrim`                | [XTRIM](https://redis.io/docs/latest/commands/xtrim/)                                 | [XTRIM](https://valkey.io/commands/xtrim/)                                 | yes |

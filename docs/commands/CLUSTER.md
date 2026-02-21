@@ -18,8 +18,8 @@ limitations under the License.
 
 `clusterSlots`, `asking`
 
-| keyscope_client               | Redis                                                                                                 | Valkey                                                                                     |
-|-------------------------------|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| keyscope_client               | Redis                                                                                                 | Valkey                                                                                     | Google Memorystore |
+|-------------------------------|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|--------------------|
 | `asking`                      | [ASKING](https://redis.io/docs/latest/commands/asking/)                                               | [ASKING](https://valkey.io/commands/asking/)                                               |
 | `cluster`                     | [CLUSTER](https://redis.io/docs/latest/commands/cluster/)                                             | [CLUSTER](https://valkey.io/commands/cluster/)                                             |
 | `clusterAddSlots`             | [CLUSTER ADDSLOTS](https://redis.io/docs/latest/commands/cluster-addslots/)                           | [CLUSTER ADDSLOTS](https://valkey.io/commands/cluster-addslots/)                           |

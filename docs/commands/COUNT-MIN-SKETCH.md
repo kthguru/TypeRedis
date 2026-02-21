@@ -16,8 +16,8 @@ limitations under the License.
 
 # COUNT-MIN SKETCH
 
-| keyscope_client | Redis                                                                   | Valkey |
-|-----------------|-------------------------------------------------------------------------|--------|
+| keyscope_client | Redis                                                                   | Valkey | Google Memorystore |
+|-----------------|-------------------------------------------------------------------------|--------|--------------------|
 | `cmsIncrBy`     | [CMS.INCRBY](https://redis.io/docs/latest/commands/cms.incrby/)         |        |
 | `cmsInfo`       | [CMS.INFO](https://redis.io/docs/latest/commands/cms.info/)             |        |
 | `cmsInitByDim`  | [CMS.INITBYDIM](https://redis.io/docs/latest/commands/cms.initbydim/)   |        |

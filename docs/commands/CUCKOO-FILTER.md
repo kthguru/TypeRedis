@@ -16,8 +16,8 @@ limitations under the License.
 
 # CUCKOO FILTER
 
-| keyscope_client | Redis                                                               | Valkey |
-|-----------------|---------------------------------------------------------------------|--------|
+| keyscope_client | Redis                                                               | Valkey | Google Memorystore |
+|-----------------|---------------------------------------------------------------------|--------|--------------------|
 | `cfAdd`         | [CF.ADD](https://redis.io/docs/latest/commands/cf.add/)             |        |
 | `cfAddNx`       | [CF.ADDNX](https://redis.io/docs/latest/commands/cf.addnx/)         |        |
 | `cfCount`       | [CF.COUNT](https://redis.io/docs/latest/commands/cf.count/)         |        |

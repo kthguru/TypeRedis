@@ -16,8 +16,8 @@ limitations under the License.
 
 # JSON
 
-| keyscope_client                 | Redis                                                                         | Valkey                                                                     |
-|---------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| keyscope_client                 | Redis                                                                         | Valkey                                                                     | Google Memorystore |
+|---------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------|--------------------|
 | `jsonArrAppend`                 | [JSON.ARRAPPEND](https://redis.io/docs/latest/commands/json.arrappend/)       | [JSON.ARRAPPEND](https://valkey.io/commands/json.arrappend/)               |
 | `jsonArrAppendEnhanced`         |                                                                               |                                                                            |
 | `jsonArrIndex`                  | [JSON.ARRINDEX](https://redis.io/docs/latest/commands/json.arrindex/)         | [JSON.ARRINDEX](https://valkey.io/commands/json.arrindex/)                 |

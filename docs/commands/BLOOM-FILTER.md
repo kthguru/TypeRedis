@@ -16,8 +16,8 @@ limitations under the License.
 
 # BLOOM FILTER
 
-| keyscope_client | Redis                                                               | Valkey                                               |
-|-----------------|---------------------------------------------------------------------|------------------------------------------------------|
+| keyscope_client | Redis                                                               | Valkey                                               | Google Memorystore |
+|-----------------|---------------------------------------------------------------------|------------------------------------------------------|--------------------|
 | `bfAdd`         | [BF.ADD](https://redis.io/docs/latest/commands/bf.add/)             | [BF.ADD](https://valkey.io/commands/bf.add/)         |
 | `bfCard`        | [BF.CARD](https://redis.io/docs/latest/commands/bf.card/)           | [BF.CARD](https://valkey.io/commands/bf.card/)       |
 | `bfExists`      | [BF.EXISTS](https://redis.io/docs/latest/commands/bf.exists/)       | [BF.EXISTS](https://valkey.io/commands/bf.exists/)   |

@@ -16,8 +16,8 @@ limitations under the License.
 
 # TIME SERIES
 
-| keyscope_client | Redis                                                                 | Valkey |
-|-----------------|-----------------------------------------------------------------------|--------|
+| keyscope_client | Redis                                                                 | Valkey | Google Memorystore |
+|-----------------|-----------------------------------------------------------------------|--------|--------------------|
 | `tsAdd`         | [TS.ADD](https://redis.io/docs/latest/commands/ts.add/)               |        |
 | `tsAlter`       | [TS.ALTER](https://redis.io/docs/latest/commands/ts.alter/)           |        |
 | `tsCreate`      | [TS.CREATE](https://redis.io/docs/latest/commands/ts.create/)         |        |

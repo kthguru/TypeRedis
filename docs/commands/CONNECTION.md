@@ -18,33 +18,33 @@ limitations under the License.
 
 `ping`, `echo`, `close`
 
-| keyscope_client      | Redis                                                                               | Valkey                                                                   |
-|----------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| `auth`               | [AUTH](https://redis.io/docs/latest/commands/auth/)                                 | [AUTH](https://valkey.io/commands/auth/)                                 |
-| `client`             | [CLIENT](https://redis.io/docs/latest/commands/client/)                             | [CLIENT](https://valkey.io/commands/client/)                             |
-| `clientCaching`      | [CLIENT CACHING](https://redis.io/docs/latest/commands/client-caching/)             | [CLIENT CACHING](https://valkey.io/commands/client-caching/)             |
-| `clientCapa`         | [CLIENT CAPA](https://redis.io/docs/latest/commands/client-capa/)                   | [CLIENT CAPA](https://valkey.io/commands/client-capa/)                   |
-| `clientGetName`      | [CLIENT GETNAME](https://redis.io/docs/latest/commands/client-getname/)             | [CLIENT GETNAME](https://valkey.io/commands/client-getname/)             |
-| `clientGetRedir`     | [CLIENT GETREDIR](https://redis.io/docs/latest/commands/client-getredir/)           | [CLIENT GETREDIR](https://valkey.io/commands/client-getredir/)           |
-| `clientHelp`         | [CLIENT HELP](https://redis.io/docs/latest/commands/client-help/)                   | [CLIENT HELP](https://valkey.io/commands/client-help/)                   |
-| `clientId`           | [CLIENT ID](https://redis.io/docs/latest/commands/client-id/)                       | [CLIENT ID](https://valkey.io/commands/client-id/)                       |
-| `clientImportSource` | [CLIENT IMPORT-SOURCE](https://redis.io/docs/latest/commands/client-import-source/) | [CLIENT IMPORT-SOURCE](https://valkey.io/commands/client-import-source/) |
-| `clientInfo`         | [CLIENT INFO](https://redis.io/docs/latest/commands/client-info/)                   | [CLIENT INFO](https://valkey.io/commands/client-info/)                   |
-| `clientKill`         | [CLIENT KILL](https://redis.io/docs/latest/commands/client-kill/)                   | [CLIENT KILL](https://valkey.io/commands/client-kill/)                   |
-| `clientList`         | [CLIENT LIST](https://redis.io/docs/latest/commands/client-list/)                   | [CLIENT LIST](https://valkey.io/commands/client-list/)                   |
-| `clientNoEvict`      | [CLIENT NO-EVICT](https://redis.io/docs/latest/commands/client-no-evict/)           | [CLIENT NO-EVICT](https://valkey.io/commands/client-no-evict/)           |
-| `clientNoTouch`      | [CLIENT NO-TOUCH](https://redis.io/docs/latest/commands/client-no-touch/)           | [CLIENT NO-TOUCH](https://valkey.io/commands/client-no-touch/)           |
-| `clientPause`        | [CLIENT PAUSE](https://redis.io/docs/latest/commands/client-pause/)                 | [CLIENT PAUSE](https://valkey.io/commands/client-pause/)                 |
-| `clientReply`        | [CLIENT REPLY](https://redis.io/docs/latest/commands/client-reply/)                 | [CLIENT REPLY](https://valkey.io/commands/client-reply/)                 |
-| `clientSetInfo`      | [CLIENT SETINFO](https://redis.io/docs/latest/commands/client-setinfo/)             | [CLIENT SETINFO](https://valkey.io/commands/client-setinfo/)             |
-| `clientSetName`      | [CLIENT SETNAME](https://redis.io/docs/latest/commands/client-setname/)             | [CLIENT SETNAME](https://valkey.io/commands/client-setname/)             |
-| `clientTracking`     | [CLIENT TRACKING](https://redis.io/docs/latest/commands/client-tracking/)           | [CLIENT TRACKING](https://valkey.io/commands/client-tracking/)           |
-| `clientTrackingInfo` | [CLIENT TRACKINGINFO](https://redis.io/docs/latest/commands/client-trackinginfo/)   | [CLIENT TRACKINGINFO](https://valkey.io/commands/client-trackinginfo/)   |
-| `clientUnblock`      | [CLIENT UNBLOCK](https://redis.io/docs/latest/commands/client-unblock/)             | [CLIENT UNBLOCK](https://valkey.io/commands/client-unblock/)             |
-| `clientUnpause`      | [CLIENT UNPAUSE](https://redis.io/docs/latest/commands/client-unpause/)             | [CLIENT UNPAUSE](https://valkey.io/commands/client-unpause/)             |
-| `echo`               | [ECHO](https://redis.io/docs/latest/commands/echo/)                                 | [ECHO](https://valkey.io/commands/echo/)                                 |
-| `hello`              | [HELLO](https://redis.io/docs/latest/commands/hello/)                               | [HELLO](https://valkey.io/commands/hello/)                               |
-| `ping`               | [PING](https://redis.io/docs/latest/commands/ping/)                                 | [PING](https://valkey.io/commands/ping/)                                 |
-| `quit`               | [QUIT](https://redis.io/docs/latest/commands/quit/)                                 | [QUIT](https://valkey.io/commands/quit/)                                 |
-| `reset`              | [RESET](https://redis.io/docs/latest/commands/reset/)                               | [RESET](https://valkey.io/commands/reset/)                               |
-| `select`             | [SELECT](https://redis.io/docs/latest/commands/select/)                             | [SELECT](https://valkey.io/commands/select/)                             |
+| keyscope_client      | Redis                                                                               | Valkey                                                                   | Google Memorystore |
+|----------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------|
+| `auth`               | [AUTH](https://redis.io/docs/latest/commands/auth/)                                 | [AUTH](https://valkey.io/commands/auth/)                                 | yes |
+| `client`             | [CLIENT](https://redis.io/docs/latest/commands/client/)                             | [CLIENT](https://valkey.io/commands/client/)                             | |
+| `clientCaching`      | [CLIENT CACHING](https://redis.io/docs/latest/commands/client-caching/)             | [CLIENT CACHING](https://valkey.io/commands/client-caching/)             | yes |
+| `clientCapa`         | [CLIENT CAPA](https://redis.io/docs/latest/commands/client-capa/)                   | [CLIENT CAPA](https://valkey.io/commands/client-capa/)                   | |
+| `clientGetName`      | [CLIENT GETNAME](https://redis.io/docs/latest/commands/client-getname/)             | [CLIENT GETNAME](https://valkey.io/commands/client-getname/)             | yes |
+| `clientGetRedir`     | [CLIENT GETREDIR](https://redis.io/docs/latest/commands/client-getredir/)           | [CLIENT GETREDIR](https://valkey.io/commands/client-getredir/)           | yes |
+| `clientHelp`         | [CLIENT HELP](https://redis.io/docs/latest/commands/client-help/)                   | [CLIENT HELP](https://valkey.io/commands/client-help/)                   | yes |
+| `clientId`           | [CLIENT ID](https://redis.io/docs/latest/commands/client-id/)                       | [CLIENT ID](https://valkey.io/commands/client-id/)                       | yes |
+| `clientImportSource` | [CLIENT IMPORT-SOURCE](https://redis.io/docs/latest/commands/client-import-source/) | [CLIENT IMPORT-SOURCE](https://valkey.io/commands/client-import-source/) | |
+| `clientInfo`         | [CLIENT INFO](https://redis.io/docs/latest/commands/client-info/)                   | [CLIENT INFO](https://valkey.io/commands/client-info/)                   | yes |
+| `clientKill`         | [CLIENT KILL](https://redis.io/docs/latest/commands/client-kill/)                   | [CLIENT KILL](https://valkey.io/commands/client-kill/)                   | yes |
+| `clientList`         | [CLIENT LIST](https://redis.io/docs/latest/commands/client-list/)                   | [CLIENT LIST](https://valkey.io/commands/client-list/)                   | yes |
+| `clientNoEvict`      | [CLIENT NO-EVICT](https://redis.io/docs/latest/commands/client-no-evict/)           | [CLIENT NO-EVICT](https://valkey.io/commands/client-no-evict/)           | |
+| `clientNoTouch`      | [CLIENT NO-TOUCH](https://redis.io/docs/latest/commands/client-no-touch/)           | [CLIENT NO-TOUCH](https://valkey.io/commands/client-no-touch/)           | |
+| `clientPause`        | [CLIENT PAUSE](https://redis.io/docs/latest/commands/client-pause/)                 | [CLIENT PAUSE](https://valkey.io/commands/client-pause/)                 | |
+| `clientReply`        | [CLIENT REPLY](https://redis.io/docs/latest/commands/client-reply/)                 | [CLIENT REPLY](https://valkey.io/commands/client-reply/)                 | yes |
+| `clientSetInfo`      | [CLIENT SETINFO](https://redis.io/docs/latest/commands/client-setinfo/)             | [CLIENT SETINFO](https://valkey.io/commands/client-setinfo/)             | |
+| `clientSetName`      | [CLIENT SETNAME](https://redis.io/docs/latest/commands/client-setname/)             | [CLIENT SETNAME](https://valkey.io/commands/client-setname/)             | yes |
+| `clientTracking`     | [CLIENT TRACKING](https://redis.io/docs/latest/commands/client-tracking/)           | [CLIENT TRACKING](https://valkey.io/commands/client-tracking/)           | yes |
+| `clientTrackingInfo` | [CLIENT TRACKINGINFO](https://redis.io/docs/latest/commands/client-trackinginfo/)   | [CLIENT TRACKINGINFO](https://valkey.io/commands/client-trackinginfo/)   | yes |
+| `clientUnblock`      | [CLIENT UNBLOCK](https://redis.io/docs/latest/commands/client-unblock/)             | [CLIENT UNBLOCK](https://valkey.io/commands/client-unblock/)             | |
+| `clientUnpause`      | [CLIENT UNPAUSE](https://redis.io/docs/latest/commands/client-unpause/)             | [CLIENT UNPAUSE](https://valkey.io/commands/client-unpause/)             | |
+| `echo`               | [ECHO](https://redis.io/docs/latest/commands/echo/)                                 | [ECHO](https://valkey.io/commands/echo/)                                 | yes |
+| `hello`              | [HELLO](https://redis.io/docs/latest/commands/hello/)                               | [HELLO](https://valkey.io/commands/hello/)                               | yes |
+| `ping`               | [PING](https://redis.io/docs/latest/commands/ping/)                                 | [PING](https://valkey.io/commands/ping/)                                 | yes |
+| `quit`               | [QUIT](https://redis.io/docs/latest/commands/quit/)                                 | [QUIT](https://valkey.io/commands/quit/)                                 | yes |
+| `reset`              | [RESET](https://redis.io/docs/latest/commands/reset/)                               | [RESET](https://valkey.io/commands/reset/)                               | yes |
+| `select`             | [SELECT](https://redis.io/docs/latest/commands/select/)                             | [SELECT](https://valkey.io/commands/select/)                             | yes |

@@ -16,8 +16,8 @@ limitations under the License.
 
 # SEARCH
 
-| keyscope_client | Redis                                                                   | Valkey                                                   |
-|-----------------|-------------------------------------------------------------------------|----------------------------------------------------------|
+| keyscope_client | Redis                                                                   | Valkey                                                   | Google Memorystore |
+|-----------------|-------------------------------------------------------------------------|----------------------------------------------------------|--------------------|
 | `ftAggregate`   | [FT.AGGREGATE](https://redis.io/docs/latest/commands/ft.aggregate/)     |                                                          |
 | `ftAliasAdd`    | [FT.ALIASADD](https://redis.io/docs/latest/commands/ft.aliasadd/)       |                                                          |
 | `ftAliasDel`    | [FT.ALIASDEL](https://redis.io/docs/latest/commands/ft.aliasdel/)       |                                                          |

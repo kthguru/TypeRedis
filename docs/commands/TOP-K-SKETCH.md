@@ -16,8 +16,8 @@ limitations under the License.
 
 # TOP-K SKETCH
 
-| keyscope_client | Redis                                                               | Valkey |
-|-----------------|---------------------------------------------------------------------|--------|
+| keyscope_client | Redis                                                               | Valkey | Google Memorystore |
+|-----------------|---------------------------------------------------------------------|--------|--------------------|
 | `topkAdd`       | [TOPK.ADD](https://redis.io/docs/latest/commands/topk.add/)         |        |
 | `topkCount`     | [TOPK.COUNT](https://redis.io/docs/latest/commands/topk.count/)     |        |
 | `topkIncrBy`    | [TOPK.INCRBY](https://redis.io/docs/latest/commands/topk.incrby/)   |        |

@@ -18,18 +18,19 @@ limitations under the License.
 
 `psubscribe`, `publish`, `pubsubChannels`, `pubsubNumPat`, `pubsubNumSub`, `punsubscribe`, `spublish`, `ssubscribe`, `subscribe`, `sunsubscribe`, `unsubscribe`
 
-| keyscope_client       | Redis                                                                               | Valkey                                                                   |
-|-----------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| `pSubscribe`          | [PSUBSCRIBE](https://redis.io/docs/latest/commands/psubscribe/)                     | [PSUBSCRIBE](https://valkey.io/commands/psubscribe/)                     |
-| `publish`             | [PUBLISH](https://redis.io/docs/latest/commands/publish/)                           | [PUBLISH](https://valkey.io/commands/publish/)                           |
-| `pubsubChannels`      | [PUBSUB CHANNELS](https://redis.io/docs/latest/commands/pubsub-channels/)           | [PUBSUB CHANNELS](https://valkey.io/commands/pubsub-channels/)           |
-| `pubsubNumPat`        | [PUBSUB NUMPAT](https://redis.io/docs/latest/commands/pubsub-numpat/)               | [PUBSUB NUMPAT](https://valkey.io/commands/pubsub-numpat/)               |
-| `pubsubNumSub`        | [PUBSUB NUMSUB](https://redis.io/docs/latest/commands/pubsub-numsub/)               | [PUBSUB NUMSUB](https://valkey.io/commands/pubsub-numsub/)               |
-| `pubsubShardChannels` | [PUBSUB SHARDCHANNELS](https://redis.io/docs/latest/commands/pubsub-shardchannels/) | [PUBSUB SHARDCHANNELS](https://valkey.io/commands/pubsub-shardchannels/) |
-| `pubsubShardNumSub`   | [PUBSUB SHARDNUMSUB](https://redis.io/docs/latest/commands/pubsub-shardnumsub/)     | [PUBSUB SHARDNUMSUB](https://valkey.io/commands/pubsub-shardnumsub/)     |
-| `pUnsubscribe`        | [PUNSUBSCRIBE](https://redis.io/docs/latest/commands/punsubscribe/)                 | [PUNSUBSCRIBE](https://valkey.io/commands/punsubscribe/)                 |
-| `sPublish`            | [SPUBLISH](https://redis.io/docs/latest/commands/spublish/)                         | [SPUBLISH](https://valkey.io/commands/spublish/)                         |
-| `sSubscribe`          | [SSUBSCRIBE](https://redis.io/docs/latest/commands/ssubscribe/)                     | [SSUBSCRIBE](https://valkey.io/commands/ssubscribe/)                     |
-| `subscribe`           | [SUBSCRIBE](https://redis.io/docs/latest/commands/subscribe/)                       | [SUBSCRIBE](https://valkey.io/commands/subscribe/)                       |
-| `sUnsubscribe`        | [SUNSUBSCRIBE](https://redis.io/docs/latest/commands/sunsubscribe/)                 | [SUNSUBSCRIBE](https://valkey.io/commands/sunsubscribe/)                 |
-| `unsubscribe`         | [UNSUBSCRIBE](https://redis.io/docs/latest/commands/unsubscribe/)                   | [UNSUBSCRIBE](https://valkey.io/commands/unsubscribe/)                   |
+| keyscope_client       | Redis                                                                               | Valkey                                                                   | Google Memorystore |
+|-----------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------|
+| `pSubscribe`          | [PSUBSCRIBE](https://redis.io/docs/latest/commands/psubscribe/)                     | [PSUBSCRIBE](https://valkey.io/commands/psubscribe/)                     | yes |
+| `publish`             | [PUBLISH](https://redis.io/docs/latest/commands/publish/)                           | [PUBLISH](https://valkey.io/commands/publish/)                           | yes |
+| `pubsubChannels`      | [PUBSUB CHANNELS](https://redis.io/docs/latest/commands/pubsub-channels/)           | [PUBSUB CHANNELS](https://valkey.io/commands/pubsub-channels/)           | yes |
+| `pubsubNumPat`        | [PUBSUB NUMPAT](https://redis.io/docs/latest/commands/pubsub-numpat/)               | [PUBSUB NUMPAT](https://valkey.io/commands/pubsub-numpat/)               | yes |
+| `pubsubNumSub`        | [PUBSUB NUMSUB](https://redis.io/docs/latest/commands/pubsub-numsub/)               | [PUBSUB NUMSUB](https://valkey.io/commands/pubsub-numsub/)               | yes |
+| `pubsubShardChannels` | [PUBSUB SHARDCHANNELS](https://redis.io/docs/latest/commands/pubsub-shardchannels/) | [PUBSUB SHARDCHANNELS](https://valkey.io/commands/pubsub-shardchannels/) | yes |
+| `pubsubShardNumSub`   | [PUBSUB SHARDNUMSUB](https://redis.io/docs/latest/commands/pubsub-shardnumsub/)     | [PUBSUB SHARDNUMSUB](https://valkey.io/commands/pubsub-shardnumsub/)     | yes |
+| `pubsubHelp`          |                                                                                     |                                                                          | PUBSUB HELP |
+| `pUnsubscribe`        | [PUNSUBSCRIBE](https://redis.io/docs/latest/commands/punsubscribe/)                 | [PUNSUBSCRIBE](https://valkey.io/commands/punsubscribe/)                 | yes |
+| `sPublish`            | [SPUBLISH](https://redis.io/docs/latest/commands/spublish/)                         | [SPUBLISH](https://valkey.io/commands/spublish/)                         | yes |
+| `sSubscribe`          | [SSUBSCRIBE](https://redis.io/docs/latest/commands/ssubscribe/)                     | [SSUBSCRIBE](https://valkey.io/commands/ssubscribe/)                     | yes |
+| `subscribe`           | [SUBSCRIBE](https://redis.io/docs/latest/commands/subscribe/)                       | [SUBSCRIBE](https://valkey.io/commands/subscribe/)                       | yes |
+| `sUnsubscribe`        | [SUNSUBSCRIBE](https://redis.io/docs/latest/commands/sunsubscribe/)                 | [SUNSUBSCRIBE](https://valkey.io/commands/sunsubscribe/)                 | yes |
+| `unsubscribe`         | [UNSUBSCRIBE](https://redis.io/docs/latest/commands/unsubscribe/)                   | [UNSUBSCRIBE](https://valkey.io/commands/unsubscribe/)                   | yes |
